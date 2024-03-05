@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Створення тестування</title>
+    <link rel="stylesheet" href="{% static "main/css/create_testStyles.css" %}">
+</head>
+<body>
+    <header>
+        <h1>Створення тестування</h1>
+    </header>
+    <main>
+        <form id="createForm" enctype="multipart/form-data">
+            <label for="testFile" id="fileLabel">Перетягніть файл сюди або натисніть для вибору</label>
+            <input type="file" id="testFile" name="testFile" accept=".txt" style="display: none;">
+            <button type="submit">Завантажити тест</button>
+        </form>
+    </main>
+    <script src="scriptForCreate_test.js"></script>
+</body>
+</html>

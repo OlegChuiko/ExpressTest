@@ -1,20 +1,21 @@
-<!-- index.html -->
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тестувальна система</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static "main/css/temp.css" %}">
 </head>
 <body>
     <header>
         <h1>ExpressTest</h1>
     </header>
     <main>
-        <button id="createTestBtn">Створити тестування</button>
-        <button id="takeTestBtn">Пройти тестування</button>
+        <button onclick="window.location.href='{% url 'createTest:createTest' %}'">Створити тестування</button>
+        <button onclick="window.location.href='{% url 'takeTest:takeTest' %}'">Пройти тестування</button>
     </main>
-    <script src="script.js"></script>
+   <!-- <script src="script.js"></script> -->
 </body>
 </html>

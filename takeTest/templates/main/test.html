@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тести з варіантами відповідей</title>
+    <link rel="stylesheet" href="{% static "main/css/testStyle.css" %}">
+</head>
+<body>
+        {% for question, answers in qas %}
+            <div class="container">
+                <p>{{question}}</p>
+                <ul>
+                    {% for answer in answers %}
+                        {% if answer|last == '+' %}
+                            {% with temporary_answer=answer|slice:'0:-1' %}
+                                <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="answer{{ forloop.parentloop.counter }}" value="{{ temporary_answer }}">{{ temporary_answer }}</li>
+                            {% endwith %}
+                        {% else %}
+                            <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="answer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ answer }}</li>
+                        {% endif %}                  
+                    {% endfor %}    
+                </ul>
+            </div>
+        {% endfor %}
+</body>
+</html>
