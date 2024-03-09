@@ -27,7 +27,7 @@ def test(request):
         with open(TestFile.file.path, "r", encoding="utf-8") as f:
             for line in f:
                 # Перевірка, чи рядок не є порожнім
-                if line != '\n':  # Ця умова ігнорує порожні рядки
+                if line != '\n': 
                     if not isQuestion:
                         questions.append(line.strip())
                         isQuestion = True
