@@ -13,12 +13,12 @@
         <h1>Створення тестування</h1>
     </header>
     <main>
-        <form id="createForm" enctype="multipart/form-data">
+        <form id="createForm" enctype="multipart/form-data" action="{% url 'createTest:createTest' %}" method="post">
+            {% csrf_token %}
             <label for="testFile" id="fileLabel">Перетягніть файл сюди або натисніть для вибору</label>
-            <input type="file" id="testFile" name="testFile" accept=".txt" style="display: none;">
+            <input type="file" id="testFile" name="myfile" accept=".txt" style="display: none;">
             <button type="submit">Завантажити тест</button>
         </form>
     </main>
-    <script src="scriptForCreate_test.js"></script>
 </body>
 </html>
