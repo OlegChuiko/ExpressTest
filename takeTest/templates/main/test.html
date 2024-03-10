@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{% static "main/css/testStyle.css" %}">
 </head>
 <body>
+    <form action="{% url 'takeTest:testResult' %}" method="post">
+        {% csrf_token %}
         {% for question, answers in qas %}
             <div class="container">
                 <p>{{question}}</p>
@@ -16,14 +18,16 @@
                     {% for answer in answers %}
                         {% if answer|last == '+' %}
                             {% with temporary_answer=answer|slice:'0:-1' %}
-                                <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="answer{{ forloop.parentloop.counter }}" value="{{ temporary_answer }}">{{ temporary_answer }}</li>
+                                <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ temporary_answer }}</li>
                             {% endwith %}
                         {% else %}
-                            <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="answer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ answer }}</li>
+                            <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ answer }}</li>
                         {% endif %}                  
                     {% endfor %}    
                 </ul>
             </div>
         {% endfor %}
+        <button type="submit">Подати відповіді</button>
+    </form>
 </body>
 </html>
