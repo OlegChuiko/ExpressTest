@@ -27,10 +27,12 @@ def createTest(request):
             if not Test.objects.filter(unique_code=unique_code).exists():
                 break
 
+        # Отримання часу тестування з POST-запиту
+        duration_test = request.POST.get('duration_test')
 
         # Зберігаємо у базі даних
         with transaction.atomic():
-            model_instance = Test(file=myfile, unique_code=unique_code)
+            model_instance = Test(file=myfile, unique_code=unique_code,duration_test=duration_test)
             model_instance.save()
 
         return redirect('createTest:unique_codeForTest',unique_code = unique_code)  # Перенаправлення на сторінку з кодом

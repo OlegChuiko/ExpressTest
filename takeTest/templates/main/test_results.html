@@ -2,41 +2,41 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Результати тестування</title>
-    <link rel="stylesheet" href="{% static "main/css/test_resutStyle.css" %}">
-</head>
-<body>
-    <h1>Результати тестування</h1>
-    <div class="container">
-        <p>Загальна кількість питань: {{ total_questions }}</p>
-        <p>Кількість правильних відповідей: {{ correct_answers }}</p>
-        <p>Оцінка по п'ятибальній шкалі: {{ grade }}</p>
-    </div>
-    {% for question,answers,user_answer in qas %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Результати тестування</title>
+        <link rel="stylesheet" href="{% static "main/css/test_resutStyle.css" %}">
+    </head>
+    <body>
+        <h1>Результати тестування</h1>
         <div class="container">
-            <p>{{ question }}</p>
-
-            {% for answer in answers %}
-                    {% if answer|last == '+' %}
-                            {% with temporary_answer=answer|slice:'0:-1' %}
-                                {%if user_answer == answer%}
-                                    <li class="correct-answer">{{ temporary_answer }}</li>
-                                {% else %}
-                                    <p>{{ temporary_answer }}</p>
-                                {% endif %} 
-                            {% endwith %}     
-                    {% else %}
-                        {%if user_answer == answer%}
-                            <li class="incorrect-answer">{{ answer }}</li>
-                        {% else %}
-                            <p>{{ answer }}</p>
-                        {% endif %}
-                    {% endif %}                  
-            {% endfor %} 
+            <p>Загальна кількість питань: {{ total_questions }}</p>
+            <p>Кількість правильних відповідей: {{ correct_answers }}</p>
+            <p>Оцінка по п'ятибальній шкалі: {{ grade }}</p>
         </div>
-    {% endfor %}
-</body>
+        {% for question,answers,user_answer in qas %}
+            <div class="container">
+                <p>{{ question }}</p>
+
+                {% for answer in answers %}
+                        {% if answer|last == '+' %}
+                                {% with temporary_answer=answer|slice:'0:-1' %}
+                                    {%if user_answer == answer%}
+                                        <li class="correct-answer">{{ temporary_answer }}</li>
+                                    {% else %}
+                                        <p>{{ temporary_answer }}</p>
+                                    {% endif %} 
+                                {% endwith %}     
+                        {% else %}
+                            {%if user_answer == answer%}
+                                <li class="incorrect-answer">{{ answer }}</li>
+                            {% else %}
+                                <p>{{ answer }}</p>
+                            {% endif %}
+                        {% endif %}                  
+                {% endfor %} 
+            </div>
+        {% endfor %}
+    </body>
 </html>

@@ -1,5 +1,6 @@
 from createTest.models import Test
 from django.shortcuts import render
+from django.shortcuts import redirect
 from django.http import HttpResponse
 
 # Create your views here.
@@ -41,13 +42,15 @@ def test(request):
                         answers.append(tempAnswers)
                         isQuestion = False
     else:
-        return HttpResponse('Не вказано код доступу до тесту')
+        return HttpResponse('Не вказано код доступу до тесту')#Виправити щоб не можна було відправити пусту строку з кодом
 
     # Зберігаємо дані у сеансі
     request.session['questions'] = questions
     request.session['answers'] = answers
 
-    return render(request, 'main/test.html', {'qas': zip(questions, answers)})
+    test_duration = TestFile.duration_test
+
+    return render(request, 'main/test.html', {'qas': zip(questions, answers),'test_duration': test_duration})
 
 
 def TestResult(request):
@@ -71,4 +74,5 @@ def TestResult(request):
 
         return render(request,'main/test_results.html',{'qas' : zip(questions,answers,user_answers),'total_questions' : total_questions,
         'correct_answers' : correct_answers,'grade' : grade}) 
-  
+
+    

@@ -7,8 +7,6 @@ __pycache__/
 .vscode
 .idea
 
-#github stuff
-README.md
 
 #django stuff
 db.sqlite3

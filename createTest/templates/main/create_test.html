@@ -17,6 +17,8 @@
             {% csrf_token %}
             <label for="testFile" id="fileLabel">Перетягніть файл сюди або натисніть для вибору</label>
             <input type="file" id="testFile" name="myfile" accept=".txt" style="display: none;">
+            <label for="testDuration">Час для проходження тесту (в хвилинах):</label>
+            <input type="number" id="testDuration" name="duration_test" min="1" required>
             <button type="submit">Завантажити тест</button>
         </form>
     </main>

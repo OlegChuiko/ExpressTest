@@ -1,33 +1,78 @@
 {% load static %}
-
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тести з варіантами відповідей</title>
-    <link rel="stylesheet" href="{% static "main/css/testStyle.css" %}">
-</head>
-<body>
-    <form action="{% url 'takeTest:testResult' %}" method="post">
-        {% csrf_token %}
-        {% for question, answers in qas %}
-            <div class="container">
-                <p>{{question}}</p>
-                <ul>
-                    {% for answer in answers %}
-                        {% if answer|last == '+' %}
-                            {% with temporary_answer=answer|slice:'0:-1' %}
-                                <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ temporary_answer }}</li>
-                            {% endwith %}
-                        {% else %}
-                            <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ answer }}</li>
-                        {% endif %}                  
-                    {% endfor %}    
-                </ul>
-            </div>
-        {% endfor %}
-        <button type="submit">Подати відповіді</button>
-    </form>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Тести з варіантами відповідей</title>
+        <link rel="stylesheet" href="{% static "main/css/testStyle.css" %}"> 
+    </head>
+    <body>
+        <form id="testForm" action="{% url 'takeTest:testResult' %}" method="post">
+            {% csrf_token %}
+            {% for question, answers in qas %}
+                <div class="container">
+                    <p>{{question}}</p>
+                    <ul>
+                        {% for answer in answers %}
+                            {% if answer|last == '+' %}
+                                {% with temporary_answer=answer|slice:'0:-1' %}
+                                    <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ temporary_answer }}</li>
+                                
+                                    <!-- На випадок якщо користувач не вибрав жоден з варіантів -->
+                                    <li style="display: none;">
+                                        <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" value="default" checked>
+                                    </li>
+                                {% endwith %}
+                            {% else %}
+                                <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ answer }}</li>
+                                
+                                <!-- На випадок якщо користувач не вибрав жоден з варіантів -->           
+                                <li style="display: none;">
+                                    <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" value="default" checked>
+                                </li>
+                            {% endif %}                  
+                        {% endfor %}      
+                    </ul>
+                </div>
+            {% endfor %}
+            <button type="submit">Подати відповіді</button>
+        </form>
+        <!-- Якщо тривалість тесту = 0 це означає що тест не обмежений в часі-->
+        {% if test_duration > 0 %}
+            <!-- Скрипт для таймера -->
+            <script>
+                // Отримуємо час тестування в хвилинах 
+                var durationInMinutes = {{test_duration}};
+                            
+                // Конвертуємо час тестування в секунди
+                var totalSeconds = durationInMinutes * 60;
+
+                // Запускаємо таймер
+                var timer = setInterval(function() {
+                    // Оновлюємо лічильник часу на сторінці
+                    document.getElementById('timer').innerHTML = formatTime(totalSeconds);
+                    
+                    // Зменшуємо залишковий час на одну секунду
+                    totalSeconds--;
+                    
+                    // Перевіряємо, чи час тестування вичерпано
+                    if (totalSeconds < 0) {
+                        // Якщо так, перенаправляємо користувача на сторінку результатів
+                        var form = document.getElementById('testForm');
+                        form.submit();
+                    }
+                }, 1000);
+
+                // Функція для форматування часу у форматі MM:SS
+                function formatTime(seconds) {
+                    var minutes = Math.floor(seconds / 60);
+                    var remainderSeconds = seconds % 60;
+                    return minutes + ':' + (remainderSeconds < 10 ? '0' : '') + remainderSeconds;
+                }
+            </script>
+            <div id="timer"></div>
+        {%endif%}
+    </body>
 </html>
