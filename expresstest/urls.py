@@ -19,6 +19,7 @@ from django.contrib import admin
 from django.urls import path
 from main import views
 
+from expresstest.settings import DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +27,9 @@ urlpatterns = [
     path('createTest/',include('createTest.urls',namespace='createTest')),
     path('takeTest/',include('takeTest.urls',namespace='takeTest')),
 ]
+
+
+if DEBUG:
+    urlpatterns +=[
+        path("__debug__/", include("debug_toolbar.urls")),
+    ]
