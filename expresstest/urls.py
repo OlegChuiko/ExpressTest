@@ -24,8 +24,9 @@ from expresstest.settings import DEBUG
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('main.urls',namespace='main')),
-    path('createTest/',include('createTest.urls',namespace='createTest')),
-    path('takeTest/',include('takeTest.urls',namespace='takeTest')),
+    path('dashboard/',include('dashboard.urls',namespace='dashboard')),
+    path('take_test/',include('takeTest.urls',namespace='takeTest')),
+    path('user/',include('users.urls',namespace='user')),
 ]
 
 

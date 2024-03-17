@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Реєстрація</title>
+        <link rel="stylesheet" href="{% static 'main/css/registrationStyle.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <h2>Реєстрація</h2>
+            <form action="{% url "user:registration" %}" method="post">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="id_first_name">Ім'я:</label>            
+                    <input type="text" id="id_first_name" value = "{% if form.first_name.value %}{{form.first_name.value}}{% endif %}" name="first_name" required>
+                    {% if form.first_name.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                    {% endif %}
+                </div>
+                <div class="input-group">
+                    <label for="id_last_name">Прізвище:</label>
+                    <input type="text" id="id_last_name" value = "{% if form.last_name.value %}{{form.last_name.value}}{% endif %}" name="last_name" required>
+                    {% if form.last_name.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                    {% endif %}
+                </div>
+                <div class="input-group">
+                    <label for="id_email">Електронна пошта:</label>
+                    <input type="email" id="id_email" value = "{% if form.email.value %}{{form.email.value}}{% endif %}" name="email" required>
+                    {% if form.email.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                    {% endif %}
+                </div> 
+                <div class="input-group">
+                    <label for="id_password1">Пароль:</label>
+                    <input type="password" id="id_password1" value = "{% if form.password.value %}{{form.password.value}}{% endif %}" name="password1" required>
+                    {% if form.password1.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.password1.errors}}</div>
+                    {% endif %}
+                </div>
+                <div class="input-group">
+                    <label for="id_password2">Підтвердіть пароль:</label>
+                    <input type="password" id="id_password2" value = "{% if form.password.value %}{{form.password.value}}{% endif %}" name="password2" required>
+                    {% if form.password2.errors %}
+                        <div class="alert alert-danger alert-dismissible fade show">{{form.password2.errors}}</div>
+                    {% endif %}
+                </div>
+                <button type="submit">Зареєструватися</button>
+            </form>
+        </div>
+    </body>
+</html>

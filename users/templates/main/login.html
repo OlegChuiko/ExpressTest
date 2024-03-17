@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="{% static "main/css/loginStyle.css" %}">
+    </head>
+    <body>
+        <form id="loginForm" action="{% url "user:login" %}" method="post"> 
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                <div class="container mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="alert alert-danger alert-dismissible fade show custom-shadow" role="alert">
+                                {{form.non_field_errors}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            <div class="container">
+                <label for="id_username"><b>Email</b></label>
+                <input type="text" id = "id_username" value = "{% if form.username.value %}{{form.username.value}}{% endif %}" placeholder="Enter Email" name="username" required>
+
+                <label for="id_password"><b>Password</b></label>
+                <input type="password" id = "id_password" placeholder="Enter Password" name="password" required>
+
+                <button type="submit">Login</button>
+            </div> 
+        </form>
+        <div class="container">
+            <p>Don't have an account? <a href="{% url 'user:registration' %}">Register</a></p>
+        </div>
+    </body>
+</html>

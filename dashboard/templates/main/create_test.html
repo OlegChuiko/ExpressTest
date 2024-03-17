@@ -13,7 +13,7 @@
         <h1>Створення тестування</h1>
     </header>
     <main>
-        <form id="createForm" enctype="multipart/form-data" action="{% url 'createTest:createTest' %}" method="post">
+        <form id="createForm" enctype="multipart/form-data" action="{% url 'dashboard:createTest' %}" method="post">
             {% csrf_token %}
             <label for="testFile" id="fileLabel">Перетягніть файл сюди або натисніть для вибору</label>
             <input type="file" id="testFile" name="myfile" accept=".txt" style="display: none;">
