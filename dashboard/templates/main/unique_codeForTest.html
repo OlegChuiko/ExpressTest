@@ -6,13 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unique Code</title>
-    <link rel="stylesheet" href={% static "main/css/unique_codeForTestStyle.css" %}>
+    <link rel="stylesheet" href="{% static 'main/css/unique_codeForTestStyle.css' %}">
 </head>
 <body>
     <div class="container">
         <h1>Your Unique Code</h1>
         <p class="code">{{ unique_code }}</p>
         <p>Keep this code safe!</p>
+        <a href="{% url 'dashboard:dashBoard' %}" class="home-button">На головну</a>
     </div>
 </body>
 </html>

@@ -15,10 +15,16 @@
     <main>
         <form id="createForm" enctype="multipart/form-data" action="{% url 'dashboard:createTest' %}" method="post">
             {% csrf_token %}
+            <!-- Додано рядок для імені тесту -->
+            <label for="testName">Назва тесту:</label>
+            <input type="text" id="testName" name="test_name" required>
+
             <label for="testFile" id="fileLabel">Перетягніть файл сюди або натисніть для вибору</label>
-            <input type="file" id="testFile" name="myfile" accept=".txt" style="display: none;">
+            <input type="file" id="testFile" name="myfile" accept=".txt" style="display: none;" required>
+            
             <label for="testDuration">Час для проходження тесту (в хвилинах):</label>
-            <input type="number" id="testDuration" name="duration_test" min="1" required>
+            <input type="number" id="testDuration" name="duration_test" min="0" required>
+            
             <button type="submit">Завантажити тест</button>
         </form>
     </main>

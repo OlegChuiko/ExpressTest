@@ -37,7 +37,9 @@
                     </ul>
                 </div>
             {% endfor %}
-            <button type="submit">Подати відповіді</button>
+            <button type="submit" id="submit-btn" onclick="this.disabled=true; this.innerText='Відправляється...'; this.form.submit();">
+                Відправити відповіді
+            </button>
         </form>
         <!-- Якщо тривалість тесту = 0 це означає що тест не обмежений в часі-->
         {% if test_duration > 0 %}
@@ -73,6 +75,15 @@
                 }
             </script>
             <div id="timer"></div>
+            <script>
+                window.onload = function() {
+                    
+                    window.history.pushState(null, null, window.location.href);
+                    window.onpopstate = function() {
+                        window.history.pushState(null, null, window.location.href);
+                    };
+                };
+            </script>
         {%endif%}
     </body>
 </html>

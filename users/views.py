@@ -20,6 +20,10 @@ def login(request):
             user = auth.authenticate(request,username=username,password=password)
             if user:
                 auth.login(request,user)
+
+                if request.POST.get('next',None):
+                    return HttpResponseRedirect(request.POST.get('next'))
+
                 return HttpResponseRedirect(reverse('dashboard:dashBoard'))
     else:
         form = UserLoginForm()
@@ -39,7 +43,7 @@ def registration(request):
             user = form.save(commit=False)
             user.username = user.email  # Присвоюємо значення email полю username
             user.save()
-            return HttpResponseRedirect(reverse('dashboard:dashBoard'))
+            return HttpResponseRedirect(reverse('user:login'))
     else:
         form = UserRegistrationForm()
     return render(request,'main/registration.html',{'form':form})

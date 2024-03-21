@@ -196,6 +196,12 @@ button:hover {
     padding-left: 13px;
     margin-top: 12px;
     margin-bottom: 12px;
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 10px; 
+    border: 1px solid #ccc; 
+    padding: 10px;
+    background-color: #f9f9f9;
 }
 
 i.user-icon {

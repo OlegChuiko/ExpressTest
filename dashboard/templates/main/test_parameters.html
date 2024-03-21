@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інформація про тест</title>
+    <link rel="stylesheet" href="{% static "main/css/test_parametersStyle.css" %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Інформація про тест</h1>
+        <div class="test-info">
+            <label for="test-name">Назва тесту:</label>
+            <p id="test-name">{{ test.test_name }}</p>
+        </div>
+        <div class="test-info">
+            <label for="test-file">Назва файлу тесту:</label>
+            <p id="test-file">{{ filename }}</p>
+        </div>
+        <div class="test-info">
+            <label for="unique-code">Унікальний код:</label>
+            <p id="unique-code">{{ test.unique_code }}</p>
+        </div>
+        <div class="test-info">
+            <label for="duration">Тривалість:</label>
+            <p id="duration">{{ test.duration_test }}</p>
+        </div>
+    </div>
+
+    <div class="results-container">
+        <h2>Результати</h2>
+        <table>
+            <tr>
+                <th>Ім'я</th>
+                <th>Прізвище</th>
+                <th>Правильні відповіді</th>
+                <th>Оцінка</th>
+            </tr>
+            {% for result in results %}
+            <tr>
+                <td>{{ result.first_name }}</td>
+                <td>{{ result.last_name }}</td>
+                <td>{{ result.correct_answers }}</td>
+                <td>{{ result.grade }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
