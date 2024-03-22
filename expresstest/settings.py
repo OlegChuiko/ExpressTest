@@ -12,23 +12,31 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
-from django.conf.global_settings import AUTH_USER_MODEL, LOGIN_URL
+from django.conf.global_settings import AUTH_USER_MODEL, DATABASES, LOGIN_URL
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+import environ
+
+env = environ.Env()
+environ.Env.read_env()
+
+
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)mlh%7awfr(j=_yp#dpou$x1$gr9c$_nc9-w5)cbn0fab%rknl'
+SECRET_KEY = env('KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,8 +48,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    "debug_toolbar",
 
     'main',
     'dashboard',
@@ -58,7 +64,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 ROOT_URLCONF = 'expresstest.urls'
@@ -85,6 +90,7 @@ WSGI_APPLICATION = 'expresstest.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -95,6 +101,17 @@ DATABASES = {
         'PORT':  '5432',
     }
 }
+'''
+
+#Render PostgreSQL database
+import dj_database_url
+
+DATABASES = {
+
+    'default': dj_database_url.parse(env('DATABASE_URL'))
+}
+
+
 
 
 # Password validation
@@ -138,11 +155,6 @@ STATICFILES_DIRS = [
     ]
 
 
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
