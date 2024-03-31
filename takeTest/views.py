@@ -1,10 +1,8 @@
-from enum import unique
-from dashboard.models import Test
-from django.shortcuts import render
-from django.shortcuts import redirect
 from django.http import HttpResponse
+from django.shortcuts import render
+from dashboard.models import Test
 from .models import Result
-
+import os
 
 def takeTest(request):
     return render(request,'main/take_test.html')
@@ -19,6 +17,8 @@ def test(request):
         try:
             # Отримуємо модель за унікальним ключем
             TestFile = Test.objects.get(unique_code=unique_code)
+            if not os.path.exists(TestFile.file.path):
+                return HttpResponse('Файл не знайдено')
         except Test.DoesNotExist:
             return HttpResponse('Файл не знайдено')
         

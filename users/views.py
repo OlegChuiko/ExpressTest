@@ -1,12 +1,20 @@
+from django.contrib.auth.tokens import default_token_generator
 from users.forms import UserLoginForm,UserRegistrationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth import logout as user_logout
+from django.utils.http import urlsafe_base64_encode
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
 from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect
-from dashboard.views import dashboard
+from django.views.generic import FormView
+from django.core.mail import EmailMessage
+from django.urls import reverse_lazy
+from django.conf import settings
 from django.contrib import auth
 from django.urls import reverse
-
+from .models import User
 
 def login(request):
     if request.user.is_authenticated:
@@ -35,7 +43,6 @@ def logout(request):
     return redirect('main:index')
 
 
-
 def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(data=request.POST)
@@ -47,3 +54,38 @@ def registration(request):
     else:
         form = UserRegistrationForm()
     return render(request,'main/registration.html',{'form':form})
+
+class CustomPasswordReset(FormView):
+    template_name = 'main/password_reset_form.html'
+    form_class = PasswordResetForm
+    success_url = reverse_lazy('user:password_reset_done')
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return render(self.request, 'main/password_reset_form.html', {'error_message': 'Такого користувача не існує','user_email': email})
+        
+        token_generator = default_token_generator
+        token = token_generator.make_token(user)
+        
+        uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+        
+        reset_url = self.request.build_absolute_uri(
+            reverse('user:password_reset_confirm', kwargs={'uidb64': uidb64, 'token': token})
+        )
+        
+        subject = 'Відновлення пароля'
+        message = render_to_string('main/password_reset_email.html', {'reset_url': reset_url})
+        
+        SendEmail = EmailMessage(
+            subject,
+            message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            to=[email],
+        )
+        SendEmail.send()
+        
+        return super().form_valid(form)
