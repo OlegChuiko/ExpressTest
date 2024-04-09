@@ -75,15 +75,14 @@
                 }
             </script>
             <div id="timer"></div>
-            <script>
-                window.onload = function() {
-                    
-                    window.history.pushState(null, null, window.location.href);
-                    window.onpopstate = function() {
-                        window.history.pushState(null, null, window.location.href);
-                    };
-                };
-            </script>
         {%endif%}
+        <script>
+            window.onload = function() {
+                window.history.pushState(null, null, window.location.href);
+                window.onpopstate = function() {
+                    window.history.pushState(null, null, window.location.href);
+                };
+            };
+        </script>
     </body>
 </html>
