@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
 from django.conf.global_settings import AUTH_USER_MODEL, DATABASES, LOGIN_URL
 
 import environ
@@ -69,7 +68,7 @@ ROOT_URLCONF = 'expresstest.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

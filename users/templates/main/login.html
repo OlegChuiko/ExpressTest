@@ -1,42 +1,49 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <link rel="stylesheet" href="{% static "main/css/loginStyle.css" %}">
-    </head>
-    <body>
-        <form id="loginForm" action="{% url "user:login" %}" method="post"> 
-            {% csrf_token %} 
-            {% if request.GET.next %}
-                <input type = "hidden" name = "next" value = {{request.GET.next}}>
-            {% endif %}
-            {% if form.non_field_errors %}
-                <div class="container mt-4">
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="alert alert-danger alert-dismissible fade show custom-shadow" role="alert">
-                                {{form.non_field_errors}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {% endif %}
-            <div class="container">
-                <label for="id_username"><b>Email</b></label>
-                <input type="text" id = "id_username" value = "{% if form.username.value %}{{form.username.value}}{% endif %}" placeholder="Enter Email" name="username" required>
 
-                <label for="id_password"><b>Password</b></label>
-                <input type="password" id = "id_password" placeholder="Enter Password" name="password" required>
+{% block title %}Вхід{% endblock %}
+{%block css %} <link rel="stylesheet" href="{% static "css/authentication/page-login.css" %}"> {%endblock %}
 
-                <button type="submit">Login</button>
-            </div> 
-        </form>
-        <div class="container">
-            <p>Don't have an account? <a href="{% url 'user:registration' %}">Register</a></p>
-            <p><a href="{% url "user:password_reset" %}">Forgotten your password?</a></p>
+{% block links %} 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <section id="section" class="section">
+        <div class="square">
+            <div class="yellow-square">
+                <h2 class="title-enter">
+                    Увійдіть аби створити
+                    тест
+                </h2>
+                <form id="loginForm" action="{% url "user:login" %}" method="post" class="form1">
+                    {% csrf_token %}
+                    {% if request.GET.next %}
+                        <input type = "hidden" name = "next" value = {{request.GET.next}}>
+                    {% endif %}
+                    {% if form.non_field_errors %}
+                        <p class="error-message">
+                            {{form.non_field_errors}}
+                        </p>                  
+                    {% endif %}
+
+                    <input class="email-password" type="mail" value = "{% if form.username.value %}{{form.username.value}}{% endif %}" placeholder="Електронна пошта" name="username" required> 
+                    <input class="email-password" type="password" name="password" placeholder="Пароль" required>
+                    
+                    <a class="link-btn"><button type="submit" class="form-btn">Увійти</button></a>
+                </form>
+                <p class="p-account">
+                    Не маєте акаунт? <a href="{% url 'user:registration' %}" class="link-register">Зареєструватися</a>
+                    <br>
+                    <br>
+                    <a href="{% url "user:password_reset" %}" class="link-register">Забули пароль?</a>
+                </p> 
+            </div>
         </div>
-    </body>
-</html>
+    </section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Заголовок{% endblock %}</title>
+    {% block css %} {% endblock %}
+    {% block links %} {% endblock %}
+</head>
+<body>
+    <header id="header" class="header"> 
+        <div class="container">
+            <div class="header-wrapper">
+                <a href="{% url 'main:index' %}">
+                    <img src="{% static 'img/Logo2.png' %}" alt="logo" class="header-logo">
+                </a>
+                <div class="header-expres">
+                    <h1 class="header-title">
+                        <svg class="header-circle circles" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <circle cx="25" cy="25" r="25" fill="black"/>
+                        </svg>
+                        ExpressTest
+                        <svg class="header-circle" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50" fill="none">
+                            <circle cx="25" cy="25" r="25" fill="black"/>
+                        </svg>
+                    </h1>
+                </div>
+                <a href="" class="header-link">?</a>
+            </div>
+        </div>
+    </header>
+    {% block content %}
+    
+    {% endblock %}
+
+    {% block script %}
+    
+    {% endblock %}
+</body>
+</html>

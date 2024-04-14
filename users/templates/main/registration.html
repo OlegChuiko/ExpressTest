@@ -1,55 +1,61 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
 
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Реєстрація</title>
-        <link rel="stylesheet" href="{% static 'main/css/registrationStyle.css' %}">
-    </head>
-    <body>
-        <div class="container">
-            <h2>Реєстрація</h2>
-            <form action="{% url "user:registration" %}" method="post">
-                {% csrf_token %}
-                <div class="input-group">
-                    <label for="id_first_name">Ім'я:</label>            
-                    <input type="text" id="id_first_name" value = "{% if form.first_name.value %}{{form.first_name.value}}{% endif %}" name="first_name" required>
+{% block title %}Реєстрація{% endblock %}
+
+{%block css %} <link rel="stylesheet" href="{% static "css/authentication/register.css" %}"> {%endblock %}
+
+{% block links %} 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+{%endblock %}
+
+{% block content %}
+    <section id="section" class="section">
+        <div class="square">
+            <div class="yellow-square">
+                <h2 class="title-register">
+                    Реєстрація
+                </h2>
+                <form action="{% url "user:registration" %}" class="form1" method="post">
+                    {% csrf_token %}
+                    <input class="full-input" type="name" id="id_first_name" value = "{% if form.first_name.value %}{{form.first_name.value}}{% endif %}" name="first_name" placeholder="Ім’я" required> 
                     {% if form.first_name.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{form.first_name.errors}}</div>
+                        <p class="error-message">
+                            {{form.first_name.errors}}
+                        </p>
                     {% endif %}
-                </div>
-                <div class="input-group">
-                    <label for="id_last_name">Прізвище:</label>
-                    <input type="text" id="id_last_name" value = "{% if form.last_name.value %}{{form.last_name.value}}{% endif %}" name="last_name" required>
+                    <input class="full-input" type="lastname"id="id_last_name" value = "{% if form.last_name.value %}{{form.last_name.value}}{% endif %}" name="last_name" placeholder="Прізвище" required>
                     {% if form.last_name.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{form.last_name.errors}}</div>
+                        <p class="error-message">
+                            {{form.last_name.errors}}
+                        </p>
                     {% endif %}
-                </div>
-                <div class="input-group">
-                    <label for="id_email">Електронна пошта:</label>
-                    <input type="email" id="id_email" value = "{% if form.email.value %}{{form.email.value}}{% endif %}" name="email" required>
+                    <input class="full-input" type="email" id="id_email" value = "{% if form.email.value %}{{form.email.value}}{% endif %}" name="email" placeholder="Електронна пошта" required> 
                     {% if form.email.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{form.email.errors}}</div>
+                        <p class="error-message">
+                            {{form.email.errors}}
+                        </p>
                     {% endif %}
-                </div> 
-                <div class="input-group">
-                    <label for="id_password1">Пароль:</label>
-                    <input type="password" id="id_password1" value = "{% if form.password.value %}{{form.password.value}}{% endif %}" name="password1" required>
+                    <input class="full-input" type="password" id="id_password1" value = "{% if form.password.value %}{{form.password.value}}{% endif %}" name="password1" placeholder="Пароль" required>
                     {% if form.password1.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{form.password1.errors}}</div>
+                        <p class="error-message">
+                            {{form.password1.errors}}
+                        </p>                    
                     {% endif %}
-                </div>
-                <div class="input-group">
-                    <label for="id_password2">Підтвердіть пароль:</label>
-                    <input type="password" id="id_password2" value = "{% if form.password.value %}{{form.password.value}}{% endif %}" name="password2" required>
+                    <input class="full-input" type="password" id="id_password2" value = "{% if form.password.value %}{{form.password.value}}{% endif %}" name="password2" placeholder="Підтвердіть пароль" required>
                     {% if form.password2.errors %}
-                        <div class="alert alert-danger alert-dismissible fade show">{{form.password2.errors}}</div>
+                        <p class="error-message">
+                            {{form.password2.errors}}
+                        </p>                    
                     {% endif %}
-                </div>
-                <button type="submit">Зареєструватися</button>
-            </form>
+                    <a class="link-btn"><button type="submit" class="form-btn">Зареєструватися</button></a>
+                </form>
+            </div>
         </div>
-    </body>
-</html>
+    </section>
+{%endblock %}

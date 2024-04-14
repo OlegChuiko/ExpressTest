@@ -1,42 +1,91 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
 
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Результати тестування</title>
-        <link rel="stylesheet" href="{% static "main/css/test_resutStyle.css" %}">
-    </head>
-    <body>
-        <h1>Результати тестування</h1>
-        <div class="container">
-            <p>Загальна кількість питань: {{ total_questions }}</p>
-            <p>Кількість правильних відповідей: {{ correct_answers }}</p>
-            <p>Оцінка по п'ятибальній шкалі: {{ grade }}</p>
-        </div>
-        {% for question,answers,user_answer in qas %}
-            <div class="container">
-                <p>{{ question }}</p>
+{% block title %}Результати{% endblock %}
 
-                {% for answer in answers %}
-                        {% if answer|last == '+' %}
-                                {% with temporary_answer=answer|slice:'0:-1' %}
-                                    {%if user_answer == answer%}
-                                        <li class="correct-answer">{{ temporary_answer }}</li>
-                                    {% else %}
-                                        <p>{{ temporary_answer }}</p>
-                                    {% endif %} 
-                                {% endwith %}     
-                        {% else %}
-                            {%if user_answer == answer%}
-                                <li class="incorrect-answer">{{ answer }}</li>
-                            {% else %}
-                                <p>{{ answer }}</p>
-                            {% endif %}
-                        {% endif %}                  
-                {% endfor %} 
+{%block css %} <link rel="stylesheet" href="{% static "css/test/result-test.css" %}"> {%endblock %}
+
+{% block links %} 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto+Slab&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <section id="section" clas="section">
+        <div class="test-box">
+            <div class="container-results">
+                <h3 class="result-title">
+                    Результати
+                </h3>
+                <ul class="list-results">
+                    <li class="list-result">
+                        Правильно: {{ correct_answers }}
+                    </li>
+                    <li class="list-result">
+                        Не правильно: {{ incorrect_answers }} 
+                    </li>
+                    <li class="list-result">
+                        Усього питань: {{ total_questions }}
+                    </li>
+                </ul>  
+                <h3 class="result-title">
+                    Оцінка: {{ grade }}/5
+                </h3> 
             </div>
+            {% for question,answers,user_answer in qas %} 
+                <div class="test-content">
+                        <p class="correct-answer">
+                            Виберіть одну правильну відповідь.<br>{{ question }}
+                        </p>
+                        <ul class="content-list">
+
+                            {% for answer in answers %}
+                                {% if answer|last == '+' %}
+                                        {% with temporary_answer=answer|slice:'0:-1' %}
+                                            {%if user_answer == answer%}
+                                                <li class="list-answer">
+                                                    <svg class="list-answers " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M18.9998 7.34177C18.6092 6.95124 17.9761 6.95124 17.5855 7.34177L10.3404 14.5869C9.94991 14.9774 9.31675 14.9774 8.92622 14.5869L6.38482 12.0455C5.9943 11.6549 5.36113 11.6549 4.97061 12.0455C4.58009 12.436 4.58009 13.0692 4.97061 13.4597L7.5175 15.9999C8.68944 17.1687 10.5866 17.1676 11.7572 15.9973L18.9998 8.75598C19.3903 8.36545 19.3903 7.73229 18.9998 7.34177Z" fill="#0F0F0F"/>
+                                                    </svg>
+                                                    <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" value="{{ temporary_answer }}" checked disabled>
+                                                    <label for="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="label-answer">{{ temporary_answer }}</label>
+                                                </li>
+                                            {% else %}
+                                                <li class="list-answer">
+                                                    <input type="radio"  name="UserAnswer{{ forloop.parentloop.counter }}" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" value="{{ temporary_answer }}" disabled>
+                                                    <label for="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="label-answer">{{ temporary_answer }}</label>
+                                                </li>
+                                            {% endif %} 
+                                        {% endwith %}     
+                                {% else %}
+                                    {%if user_answer == answer%}
+                                        <li class="list-answer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M6.99501 7.00627C6.60449 7.3968 6.60449 8.02996 6.99501 8.42049L10.5802 12.0056L6.99501 15.5908C6.60449 15.9813 6.60449 16.6145 6.99501 17.005C7.38553 17.3955 8.0187 17.3955 8.40922 17.005L11.9944 13.4199L15.5795 17.005C15.97 17.3955 16.6032 17.3955 16.9937 17.005C17.3843 16.6145 17.3843 15.9813 16.9937 15.5908L13.4086 12.0056L16.9937 8.4205C17.3843 8.02998 17.3843 7.39681 16.9937 7.00629C16.6032 6.61576 15.97 6.61576 15.5795 7.00629L11.9944 10.5914L8.40922 7.00627C8.0187 6.61575 7.38554 6.61575 6.99501 7.00627Z" fill="#0F0F0F"/>
+                                              </svg>
+                                            <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" value="{{ answer }}" checked disabled>
+                                            <label for="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="label-answer">{{ answer }}</label>
+                                        </li>
+                                    {% else %}
+                                        <li class="list-answer">
+                                            <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" value="{{ answer }}" disabled>
+                                            <label for="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="label-answer">{{ answer }}</label>
+                                        </li>
+                                    {% endif %}
+                                {% endif %}                  
+                            {% endfor %}
+                        </ul>
+                </div>
         {% endfor %}
-    </body>
-</html>
+        <div class="end-test">
+            <a href="{% url 'main:index' %}" class="linl-end-test">На головну</a>
+        </div>
+    </section>
+{% endblock %}

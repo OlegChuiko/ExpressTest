@@ -1,21 +1,31 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тестувальна система</title>
-    <link rel="stylesheet" href="{% static "main/css/temp.css" %}">
-</head>
-<body>
-    <header>
-        <h1>ExpressTest</h1>
-    </header>
-    <main>
-            <button onclick="window.location.href='{% url 'user:login' %}'">Створити тестування</button>
-            <button onclick="window.location.href='{% url 'takeTest:takeTest' %}'">Пройти тестування</button>
-    </main>
-   <!-- <script src="script.js"></script> -->
-</body>
-</html>
+{% block title %}ExpressTest{% endblock %}
+
+{%block css %} <link rel="stylesheet" href="{% static "css/main/indexStyle.css" %}"> {%endblock %}
+
+{% block links %} 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <section id="section" class="section">
+        <div class="container">
+            <div class="section-square">
+                <div class="circle">
+                    <h2 class="simple-title">
+                        Простий і зручний у 
+                        створенні тестів та їх проходженні
+                    </h2>
+                    <div class="links">
+                        <a href="{% url 'user:login' %}" class="link">Створити тест</a>
+                        <a href="{% url 'takeTest:takeTest' %}" class="link">Пройти тест</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

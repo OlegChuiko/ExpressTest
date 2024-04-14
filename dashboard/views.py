@@ -52,7 +52,6 @@ def dashboard(request):
     user_id = request.user.id
     user_tests = Test.objects.filter(user_id=user_id)
 
-
     return render(request,'main/dashboard.html',{'form':form,'user_tests':user_tests})
 
 @login_required
@@ -60,7 +59,13 @@ def test_parameters(request,test_id):
     test = get_object_or_404(Test,id=test_id)
     filename = test.filename()
     results = Result.objects.filter(test=test)
-    return render(request,'main/test_parameters.html',{'test':test,'filename':filename,'results':results})
+
+    form = ProfileForm(instance=request.user)
+
+    user_id = request.user.id
+    user_tests = Test.objects.filter(user_id=user_id)
+
+    return render(request,'main/test_parameters.html',{'test':test,'filename':filename,'results':results,'form':form,'user_tests':user_tests})
 
 @login_required
 def DeleteTest(request):

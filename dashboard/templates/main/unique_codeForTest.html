@@ -1,19 +1,37 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unique Code</title>
-    <link rel="stylesheet" href="{% static 'main/css/unique_codeForTestStyle.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>Your Unique Code</h1>
-        <p class="code">{{ unique_code }}</p>
-        <p>Keep this code safe!</p>
-        <a href="{% url 'dashboard:dashBoard' %}" class="home-button">На головну</a>
-    </div>
-</body>
-</html>
+{% block title %}Тестування готове{% endblock %}
+
+{%block css %} <link rel="stylesheet" href="{% static "css/create-test/ready-test.css" %}"> {%endblock %}
+
+{% block links %} 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto+Slab&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <section id="section" class="section">
+        <div class="square">
+            <div class="circle">
+                <h2 class="title-readytest">
+                    Тест готовий!
+                </h2>
+                <p class="unique-cod">
+                    Ваш унікальний код:
+                </p>
+                <p class="number">
+                    {{ unique_code }}
+                </p>
+                <a href="{% url 'dashboard:dashBoard' %}" class="passtest">На головну</a>
+            </div>
+        </div>
+    </section>   
+{% endblock %}

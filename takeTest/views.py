@@ -84,6 +84,7 @@ def TestResult(request):
         #Логіка визначення результатів тут
         total_questions = len(questions)
         correct_answers = sum(1 for user_answer in user_answers if user_answer[-1]=='+')
+        incorrect_answers = total_questions - correct_answers
 
         ratio = correct_answers / total_questions
         grade = round(ratio * 5,2)
@@ -97,6 +98,6 @@ def TestResult(request):
         request.session['isTesting'] = False
 
         return render(request,'main/test_results.html',{'qas' : zip(questions,answers,user_answers),'total_questions' : total_questions,
-        'correct_answers' : correct_answers,'grade' : grade}) 
+        'correct_answers' : correct_answers,'incorrect_answers' : incorrect_answers,'grade' : grade}) 
 
     

@@ -1,24 +1,40 @@
-<!-- take_test.html -->
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Введіть код доступу</title>
-    <link rel="stylesheet" href="{% static "main/css/take_testStyles.css" %}">
-</head>
-<body>
-    <div class="container">
-        <h2>Введіть прізвище та ім'я</h2>
-        <form action="{% url 'takeTest:test' %}" method="POST">
-            {% csrf_token %}
-            <input type="text" id="first_name" name="first_name" placeholder="Ім'я" required>
-            <input type="text" id="last_name" name="last_name" placeholder="Прізвище" required>
-            <h2>Введіть код доступу до тесту</h2>
-            <input type="text" id="accessCode" name="accessCode" placeholder="Код доступу" maxlength="6" required>
-            <button type="submit">Увійти</button>
-        </form>
-    </div>
-</body>
-</html>
+
+{% block title %}Введіть код доступу{% endblock %}
+
+{%block css %} <link rel="stylesheet" href="{% static "css/test/register-test.css" %}"> {%endblock %}
+
+{% block links %} 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+{%endblock %}
+
+{% block content %}
+    <section id="section" class="section">
+        <div class="square">
+            <div class="yellow-square">
+                <h2 class="title-name"> 
+                    Введіть прізвище та 
+                    ім’я
+                </h2>
+                <form class="form1" action="{% url 'takeTest:test' %}" method="POST">
+                    {% csrf_token %}
+                    <input class="lastsurname" type="text" id="first_name" name="first_name" placeholder="Ім'я" required>
+                    <input class="lastsurname" type="text" id="last_name" name="last_name" placeholder="Прізвище" required>
+                
+                    <h2 class="title-name cod">
+                        Введіть код доступу
+                        до тесту
+                    </h2>
+                    <input class="access-code" type="text" id="accessCode" name="accessCode" placeholder="Код доступу" required maxlength="6" >
+                    <button class="link-test" type="submit">Пройти тест</button>
+                </form>
+            </div>
+        </div>
+    </section>
+{%endblock %}

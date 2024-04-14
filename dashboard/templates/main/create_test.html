@@ -1,32 +1,53 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Створення тестування</title>
-    <link rel="stylesheet" href="{% static "main/css/create_testStyles.css" %}">
-</head>
-<body>
-    <header>
-        <h1>Створення тестування</h1>
-    </header>
-    <main>
-        <form id="createForm" enctype="multipart/form-data" action="{% url 'dashboard:createTest' %}" method="post">
-            {% csrf_token %}
-            <!-- Додано рядок для імені тесту -->
-            <label for="testName">Назва тесту:</label>
-            <input type="text" id="testName" name="test_name" required>
+{% block title %}Створення тестування{% endblock %}
 
-            <label for="testFile" id="fileLabel">Перетягніть файл сюди або натисніть для вибору</label>
-            <input type="file" id="testFile" name="myfile" accept=".txt" style="display: none;" required>
-            
-            <label for="testDuration">Час для проходження тесту (в хвилинах):</label>
-            <input type="number" id="testDuration" name="duration_test" min="0" required>
-            
-            <button type="submit">Завантажити тест</button>
-        </form>
-    </main>
-</body>
-</html>
+{%block css %} <link rel="stylesheet" href="{% static "css/create-test/create-test.css" %}"> {%endblock %}
+
+{% block links %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto+Slab&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <section id="section" class="section">
+        <div class="square">
+            <div class="circle">
+                <form id="createForm" class="file-txt" enctype="multipart/form-data" action="{% url 'dashboard:createTest' %}" method="post">
+                    {% csrf_token %}
+                    <h2 class="title-create-test">
+                        Створіть свій тест
+                    </h2>
+                    <input class="name-test" type="text" name="test_name" placeholder="Назва тесту:" required>
+
+                    <div class="drop_zone">
+                        
+                        <input class="file" type="file" name="myfile" id="fileToUpload" accept=".txt">
+                      
+                    </div>
+                    <p class="p-txt">
+                        Прийнятні типи файлу: .txt
+                    </p>
+                    <div class="content-test">
+                        <p class="test-time">
+                            Час для проходження 
+                            тесту (в хвилинах)
+                        </p>
+                        <div class="time-input">
+                            <input class="input-txt" type="number" name="duration_test" min="0" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="link-create-test">Завантажити тест</button>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}

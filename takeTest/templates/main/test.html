@@ -1,88 +1,118 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
 
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Тести з варіантами відповідей</title>
-        <link rel="stylesheet" href="{% static "main/css/testStyle.css" %}"> 
-    </head>
-    <body>
+{% block title %}Тестування{% endblock %}
+
+{%block css %}  <link rel="stylesheet" href="{% static "css/test/test.css" %}"> {%endblock %}
+
+{% block links %} 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@400;700&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto+Slab:wght@100..900&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto+Slab&family=Rufina:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <section id="section" clas="section">
+        <div id="timer" class="timer fixed-timer"></div>
         <form id="testForm" action="{% url 'takeTest:testResult' %}" method="post">
             {% csrf_token %}
             {% for question, answers in qas %}
-                <div class="container">
-                    <p>{{question}}</p>
-                    <ul>
-                        {% for answer in answers %}
-                            {% if answer|last == '+' %}
-                                {% with temporary_answer=answer|slice:'0:-1' %}
-                                    <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ temporary_answer }}</li>
-                                
-                                    <!-- На випадок якщо користувач не вибрав жоден з варіантів -->
-                                    <li style="display: none;">
-                                        <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" value="default" checked>
-                                    </li>
-                                {% endwith %}
-                            {% else %}
-                                <li><input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">{{ answer }}</li>
-                                
-                                <!-- На випадок якщо користувач не вибрав жоден з варіантів -->           
-                                <li style="display: none;">
-                                    <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" value="default" checked>
-                                </li>
-                            {% endif %}                  
-                        {% endfor %}      
-                    </ul>
+                <div class="test-box">
+                    <div class="test-content">
+                            <p class="correct-answer">
+                                Виберіть одну правильну відповідь.<br>{{question}}
+                            </p>
+                            <ul class="content-list">
+                                {% for answer in answers %}
+                                    {% if answer|last == '+' %}
+                                        {% with temporary_answer=answer|slice:'0:-1' %}
+                                            <li class="list-answer"> 
+                                                <input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">
+                                                <label for="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="label-answer">{{ temporary_answer }}</label>
+                                            </li> 
+    
+                                            <!-- На випадок якщо користувач не вибрав жоден з варіантів -->
+                                            <li style="display: none;">
+                                                <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" value="default" checked>
+                                            </li>
+                                        {% endwith %}
+                                    {% else %}
+                                        <li class="list-answer">
+                                            <input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">
+                                            <label for="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="label-answer">{{ answer }}</label>
+                                        </li>
+                                        
+                                        <!-- На випадок якщо користувач не вибрав жоден з варіантів -->           
+                                        <li style="display: none;">
+                                            <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" value="default" checked>
+                                        </li>
+                                    {% endif %}                  
+                                {% endfor %}      
+                            </ul>
+                    </div>
                 </div>
-            {% endfor %}
-            <button type="submit" id="submit-btn" onclick="this.disabled=true; this.innerText='Відправляється...'; this.form.submit();">
-                Відправити відповіді
-            </button>
-        </form>
-        <!-- Якщо тривалість тесту = 0 це означає що тест не обмежений в часі-->
-        {% if test_duration > 0 %}
-            <!-- Скрипт для таймера -->
+            {% endfor %} 
+            <div class="end-test">
+                <button  class="linl-end-test" type="submit" id="submit-btn" onclick="this.disabled=true; this.innerText='Відправляється...'; this.form.submit();">
+                    Завершити тест
+                </button>
+            </div>   
+        </form> 
+    </section>
+{% endblock %}
+
+{% block script %}
+            <!-- Якщо тривалість тесту = 0 це означає що тест не обмежений в часі-->
+            {% if test_duration > 0 %}
+                <!-- Скрипт для таймера -->
+                    <script>
+                        function minutesToTime(minutes) {
+                            var hours = Math.floor(minutes / 60);
+                            var remainingMinutes = minutes % 60;
+                            var totalSeconds = minutes * 60;
+                            return { hours: hours, minutes: remainingMinutes, seconds: totalSeconds };
+                        }
+                        
+                        var timerDisplay = document.getElementById('timer');
+                        
+                        function displayTimeLeft(time) {
+                            var display = `${time.hours < 10 ? '0' : ''}${time.hours}:${time.minutes < 10 ? '0' : ''}${time.minutes}:${time.seconds % 60 < 10 ? '0' : ''}${time.seconds % 60}`;
+                            timerDisplay.textContent = display;
+                        }
+                        
+                        function startTimer(totalTimeInMinutes) {
+                            var startTime = Date.now();
+                            var endTime = startTime + totalTimeInMinutes * 60 * 1000;
+                        
+                            var countdown = setInterval(function() {
+                                var secondsLeft = Math.round((endTime - Date.now()) / 1000);
+                                if (secondsLeft < 0) {
+                                    clearInterval(countdown);
+                                    var form = document.getElementById('testForm');
+                                    form.submit();
+                                } else {
+                                    var timeLeft = minutesToTime(Math.floor(secondsLeft / 60));
+                                    timeLeft.seconds = secondsLeft % 60;
+                                    displayTimeLeft(timeLeft);
+                                }
+                            }, 1000);
+                        }
+                        
+                        startTimer({{ test_duration }}); 
+                    </script>
+            {%endif%}
             <script>
-                // Отримуємо час тестування в хвилинах 
-                var durationInMinutes = {{test_duration}};
-                            
-                // Конвертуємо час тестування в секунди
-                var totalSeconds = durationInMinutes * 60;
-
-                // Запускаємо таймер
-                var timer = setInterval(function() {
-                    // Оновлюємо лічильник часу на сторінці
-                    document.getElementById('timer').innerHTML = formatTime(totalSeconds);
-                    
-                    // Зменшуємо залишковий час на одну секунду
-                    totalSeconds--;
-                    
-                    // Перевіряємо, чи час тестування вичерпано
-                    if (totalSeconds < 0) {
-                        // Якщо так, перенаправляємо користувача на сторінку результатів
-                        var form = document.getElementById('testForm');
-                        form.submit();
-                    }
-                }, 1000);
-
-                // Функція для форматування часу у форматі MM:SS
-                function formatTime(seconds) {
-                    var minutes = Math.floor(seconds / 60);
-                    var remainderSeconds = seconds % 60;
-                    return minutes + ':' + (remainderSeconds < 10 ? '0' : '') + remainderSeconds;
-                }
-            </script>
-            <div id="timer"></div>
-        {%endif%}
-        <script>
-            window.onload = function() {
-                window.history.pushState(null, null, window.location.href);
-                window.onpopstate = function() {
+                window.onload = function() {
                     window.history.pushState(null, null, window.location.href);
+                    window.onpopstate = function() {
+                        window.history.pushState(null, null, window.location.href);
+                    };
                 };
-            };
-        </script>
-    </body>
-</html>
+            </script>
+{% endblock script %}
