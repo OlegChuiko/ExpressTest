@@ -32,8 +32,20 @@
                         </p>                  
                     {% endif %}
 
-                    <input class="email-password" type="mail" value = "{% if form.username.value %}{{form.username.value}}{% endif %}" placeholder="Електронна пошта" name="username" required> 
-                    <input class="email-password" type="password" name="password" placeholder="Пароль" required>
+                    <div class="input-box">
+                        <input class="email-password {%  if form.non_field_errors %}error{% endif %}" 
+                        type="mail" 
+                        value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
+                        placeholder="Електронна пошта" 
+                        name="username" 
+                        required> 
+                        <input id="password-input" 
+                        class="email-password {% if form.non_field_errors %}error{% endif %}" 
+                        type="password" 
+                        name="password" 
+                        placeholder="Пароль" 
+                        required>
+                    </div>
                     
                     <a class="link-btn"><button type="submit" class="form-btn">Увійти</button></a>
                 </form>

@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin: 0;
   background-color: #FFF555;
-  background-image: url(/static/img/section.png);
+  background-image: url("/static/img/section.d9e7969d3c36.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -87,72 +87,91 @@ h6 {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
   margin-top: 65px;
-  padding-top: 62px;
-  padding-bottom: 71px;
+  padding-top: 66px;
+  padding-bottom: 66px;
 }
 
 .yellow-square {
-  background-color: #FCC827;
-  max-width: 547px;
-  padding-top: 32px;
-  padding-bottom: 107px;
-  margin-left: 221px;
-  border-radius: 15px;
-  border: 1px solid black;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+background-color: #FCC827;
+max-width: 547px;
+padding-top: 32px;
+padding-bottom: 209px;
+margin-left: 226px;
+border-radius: 15px;
+border: 1px solid black;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-.title-register {
-  font-family: "Roboto Slab", serif;
-  font-weight: 600;
-  font-size: 35px;
-  text-align: center;
+.title-enter {
+font-family: "Roboto Slab", serif;
+font-weight: 600;
+font-size: 35px;
+max-width: 410px;
+text-align: center;
+margin-left: 63px;
 }
 
 .form1 {
-  margin-top: 35px;
+margin-top: 10px;
 }
 
-.full-input {
-  display: block;
-  font-family: "Roboto Slab", serif;
-  font-size: 20px;
-  width: 470px;
-  padding: 12px 19px;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 39px;
-  margin-top: 5px;
+.email-password {
+display: block;
+font-family: "Roboto Slab", serif;
+font-size: 20px;
+width: 470px;
+padding: 12px 19px;
+border: 1px solid black;
+border-radius: 5px;
+margin-left: 39px;
+margin-top: 5px;
+}
+.email-password.error {
+border: 1.5px solid red;
 }
 
-.full-input.error {
-border: 2px solid red;
-}
+
+
 
 .form-btn {
-  color: #FFF;
-  background-color: #000;
-  font-family: "Rufina", serif;
-  font-weight: bold;
-  display: block;
-  width: 470px;
-  padding: 13px 0;
-  border-radius: 5px;
-  border: 0px;
-  margin-left: 39px;
-  margin-top: 10px;
-  text-transform: capitalize;
-  text-align: center;
-  text-decoration: none;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-  transition: all 0.5s ease;
-  cursor: pointer;
+color: #FFF;
+background-color: #000;
+font-family: "Rufina", serif;
+font-weight: bold;
+display: block;
+width: 470px;
+padding: 13px 0;
+border-radius: 5px;
+border: 0px;
+margin-left: 39px;
+margin-top: 10px;
+text-transform: capitalize; 
+text-align: center;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+transition: all 0.5s ease;
+cursor: pointer;
 }
 
 .link-btn {
-  text-decoration: none;
+text-decoration: none;
 }
 
 .form-btn:hover  {
-  background-color: #393939;
+ background-color: #393939;
+}
+
+.p-account {
+font-family: "Roboto Serif";
+font-size: 16px;
+margin-left: 39px;
+margin-top: 30px;
+}
+
+.link-register {
+color: #000;
+transition: all 0.5s ease;
+}
+
+.link-register:hover {
+color: #696969;
 }

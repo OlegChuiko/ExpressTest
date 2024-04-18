@@ -36,18 +36,36 @@
                     {% for test in user_tests %}
                         <li class="list">
                             <a href="{% url 'dashboard:test_parameters' test_id=test.id %}" class="link">{{ test.test_name }}</a>
-                            <div class="button-container">
-                                <form action="{% url 'dashboard:delete_test' %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="test_id" value="{{ test.id }}">
-                                    <button class="menu-test-view" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                      <path d="M8.99988 11C8.99988 10.4477 9.44759 10 9.99988 10C10.5522 10 10.9999 10.4477 10.9999 11V17C10.9999 17.5523 10.5522 18 9.99988 18C9.44759 18 8.99988 17.5523 8.99988 17V11Z" fill="black"/>
-                                      <path d="M13.9999 10C13.4476 10 12.9999 10.4477 12.9999 11V17C12.9999 17.5523 13.4476 18 13.9999 18C14.5522 18 14.9999 17.5523 14.9999 17V11C14.9999 10.4477 14.5522 10 13.9999 10Z" fill="black"/>
-                                      <path fill-rule="evenodd" clip-rule="evenodd" d="M8.53101 1C5.52352 1 3.19659 3.63591 3.56962 6.62017L5.28861 20.3721C5.47627 21.8734 6.75248 23 8.26545 23H15.7343C17.2473 23 18.5235 21.8734 18.7112 20.3721L20.4301 6.62017C20.8032 3.63591 18.4762 1 15.4688 1H8.53101ZM5.70136 5C6.11054 3.8455 7.21163 3 8.53101 3H15.4688C16.7881 3 17.8892 3.8455 18.2984 5H5.70136ZM5.63266 7L7.27317 20.124C7.33572 20.6245 7.76112 21 8.26545 21H15.7343C16.2386 21 16.664 20.6245 16.7266 20.124L18.3671 7H5.63266Z" fill="black"/>
-                                    </svg> </button>
-                                </form>
+                            <div class="button-container">   
+                                <button id="openBtn{{ test.id }}" class="menu-test-view" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M8.99988 11C8.99988 10.4477 9.44759 10 9.99988 10C10.5522 10 10.9999 10.4477 10.9999 11V17C10.9999 17.5523 10.5522 18 9.99988 18C9.44759 18 8.99988 17.5523 8.99988 17V11Z" fill="black"/>
+                                    <path d="M13.9999 10C13.4476 10 12.9999 10.4477 12.9999 11V17C12.9999 17.5523 13.4476 18 13.9999 18C14.5522 18 14.9999 17.5523 14.9999 17V11C14.9999 10.4477 14.5522 10 13.9999 10Z" fill="black"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.53101 1C5.52352 1 3.19659 3.63591 3.56962 6.62017L5.28861 20.3721C5.47627 21.8734 6.75248 23 8.26545 23H15.7343C17.2473 23 18.5235 21.8734 18.7112 20.3721L20.4301 6.62017C20.8032 3.63591 18.4762 1 15.4688 1H8.53101ZM5.70136 5C6.11054 3.8455 7.21163 3 8.53101 3H15.4688C16.7881 3 17.8892 3.8455 18.2984 5H5.70136ZM5.63266 7L7.27317 20.124C7.33572 20.6245 7.76112 21 8.26545 21H15.7343C16.2386 21 16.664 20.6245 16.7266 20.124L18.3671 7H5.63266Z" fill="black"/>
+                                </svg></button>
                             </div>
                         </li>
+                        <div id="popup{{ test.id }}" class="popup">
+                            <div class="popup_window">
+                                <div class="popup__square">
+                                    <div class="popup__yellow_square">
+                                        <h2 class="popup__title">
+                                            Ви дійсно хочете видалити "{{ test.test_name }}"?
+                                        </h2>
+                                        <p class="popup__text">
+                                            Ви більше не зможете його відновити!
+                                        </p>
+                                        <div class="popup__link">
+                                            <form action="{% url 'dashboard:delete_test' %}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="test_id" value="{{ test.id }}">
+                                                <button class="link_delete" type="submit">Видалити тест</button>
+                                            </form>
+                                            <button class="link_cancel" type="button" onclick="hidePopup('popup{{ test.id }}')">Скасувати</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     {% endfor %}
                     <div class="link-exit">
                         <a href="{% url 'user:logout' %}" class="exit">Вийти</a>
@@ -70,6 +88,20 @@
     
     {% endblock testParametrs %}
     <script src="{% static "js/dashboard/sidebar.js" %}"></script>
-    <script src="{% static "js/dashboard/confirmDeleteScript.js" %}"></script>
-    </section>
+    <script>
+        {% for test in user_tests %}
+        document.getElementById("openBtn{{ test.id }}").addEventListener("click", function() {
+        document.getElementById("popup{{ test.id }}").classList.add("active");
+    });
+        {% endfor %}
+
+    function hidePopup(popupId) {
+        document.getElementById(popupId).classList.remove("active");
+    }   
+
+    </script>
+    {% endblock %}
+
+{% block script %}
+
 {% endblock %}

@@ -1,186 +1,177 @@
 body {
-    font-size: 15px;
-    padding: 0;
-    margin: 0;
-    background-color: #FFF555;
-    background-image: url(/static/img/section.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  
-  div,
-  p,
-  input,
-  button,
-  form,
-  span,
-  a,
-  ul,
-  li {
-    box-sizing: border-box;
-    margin: 0;
-  }
-  
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 0;
-    padding: 0;
-  }
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+  background-color: #FFF555;
+  background-image: url(/static/img/section.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+div,
+p,
+input,
+button,
+form,
+span,
+a,
+ul,
+li {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+}
 
 .header {
-    background-color: #fcc827;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    border: 2px solid black;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  background-color: #fcc827;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border: 2px solid black;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
 }
 
 .container {
-    max-width: 1144px;
-    margin: 0 auto;
+  max-width: 1144px;
+  margin: 0 auto;
 }
 
 .header-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header-logo {
-    border-radius: 15px;
-    border: 1px solid black;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-}
-
-
-.header-title {
-    font-size: 60px;
-    font-family: "Laila", serif;
-    font-weight: 700;
-}
-
-.header-link {
-    color: #000;
-    font-family: "Roboto Mono";
-    font-size: 40px;
-    font-weight: 700;
-    width: 50px;
-    height: 52px;
-    border-radius: 5px;
-    border: 2px solid #000;
-    text-align: center;
-    text-decoration: none;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  } 
-
-  .square {
-    max-width: 1000px;
-    background-color: #fff;
-    border-radius: 15px;
-    border: 2px solid black;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-    margin: 0 auto;
-    margin-top: 65px;
-    padding-top: 66px;
-    padding-bottom: 66px;
-}
-
-.yellow-square {
-  background-color: #FCC827;
-  max-width: 547px;
-  padding-top: 32px;
-  padding-bottom: 209px;
-  margin-left: 226px;
   border-radius: 15px;
   border: 1px solid black;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-.title-enter {
-  font-family: "Roboto Slab", serif;
-  font-weight: 600;
-  font-size: 35px;
-  max-width: 410px;
+
+.header-title {
+  font-size: 60px;
+  font-family: "Laila", serif;
+  font-weight: 700;
+}
+
+.header-link {
+  color: #000;
+  font-family: "Roboto Mono";
+  font-size: 40px;
+  font-weight: 700;
+  width: 50px;
+  height: 52px;
+  border-radius: 5px;
+  border: 2px solid #000;
   text-align: center;
-  margin-left: 63px;
+  text-decoration: none;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+} 
+
+.square {
+  max-width: 1000px;
+  background-color: #fff;
+  border-radius: 15px;
+  border: 2px solid black;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  margin-top: 65px;
+  padding-top: 66px;
+  padding-bottom: 66px;
+}
+
+.yellow-square {
+background-color: #FCC827;
+max-width: 547px;
+padding-top: 32px;
+padding-bottom: 209px;
+margin-left: 226px;
+border-radius: 15px;
+border: 1px solid black;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.title-enter {
+font-family: "Roboto Slab", serif;
+font-weight: 600;
+font-size: 35px;
+max-width: 410px;
+text-align: center;
+margin-left: 63px;
 }
 
 .form1 {
-  margin-top: 10px;
+margin-top: 10px;
 }
 
 .email-password {
-  display: block;
-  font-family: "Roboto Slab", serif;
-  font-size: 20px;
-  width: 470px;
-  padding: 12px 19px;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 39px;
-  margin-top: 5px;
+display: block;
+font-family: "Roboto Slab", serif;
+font-size: 20px;
+width: 470px;
+padding: 12px 19px;
+border: 1px solid black;
+border-radius: 5px;
+margin-left: 39px;
+margin-top: 5px;
+}
+.email-password.error {
+border: 1.5px solid red;
 }
 
-input[type="password"]:invalid {
-  border: 2px solid red; 
-}
 
-input[type="password"]:invalid + input[type="password"]:invalid ~ .error-message {
-  display: block; 
-} 
 
-.error-message {
-  font-family: "Roboto Slab", serif;
-  margin-left: 39px;
-  margin-top: 5px;
-  color: red;
-}
 
 .form-btn {
-  color: #FFF;
-  background-color: #000;
-  font-family: "Rufina", serif;
-  font-weight: bold;
-  display: block;
-  width: 470px;
-  padding: 13px 0;
-  border-radius: 5px;
-  border: 0px;
-  margin-left: 39px;
-  margin-top: 10px;
-  text-transform: capitalize; 
-  text-align: center;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
-  transition: all 0.5s ease;
-  cursor: pointer;
+color: #FFF;
+background-color: #000;
+font-family: "Rufina", serif;
+font-weight: bold;
+display: block;
+width: 470px;
+padding: 13px 0;
+border-radius: 5px;
+border: 0px;
+margin-left: 39px;
+margin-top: 10px;
+text-transform: capitalize; 
+text-align: center;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+transition: all 0.5s ease;
+cursor: pointer;
 }
 
 .link-btn {
-  text-decoration: none;
+text-decoration: none;
 }
 
 .form-btn:hover  {
-   background-color: #393939;
+ background-color: #393939;
 }
 
 .p-account {
-  font-family: "Roboto Serif";
-  font-size: 16px;
-  margin-left: 39px;
-  margin-top: 30px;
+font-family: "Roboto Serif";
+font-size: 16px;
+margin-left: 39px;
+margin-top: 30px;
 }
 
 .link-register {
-  color: #000;
-  transition: all 0.5s ease;
+color: #000;
+transition: all 0.5s ease;
 }
 
 .link-register:hover {
-  color: #696969;
+color: #696969;
 }

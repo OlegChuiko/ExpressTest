@@ -35,24 +35,42 @@
                             {{form.last_name.errors}}
                         </p>
                     {% endif %}
-                    <input class="full-input" type="email" id="id_email" value = "{% if form.email.value %}{{form.email.value}}{% endif %}" name="email" placeholder="Електронна пошта" required> 
+                    <input class="full-input {% if form.email.value %}error{% endif %}" 
+                        type="email" 
+                        id="id_email" 
+                        value = "{% if form.email.value %}{{form.email.value}}{% endif %}" 
+                        name="email" 
+                        placeholder="Електронна пошта" required> 
                     {% if form.email.errors %}
                         <p class="error-message">
                             {{form.email.errors}}
                         </p>
                     {% endif %}
-                    <input class="full-input" type="password" id="id_password1" value = "{% if form.password.value %}{{form.password.value}}{% endif %}" name="password1" placeholder="Пароль" required>
-                    {% if form.password1.errors %}
-                        <p class="error-message">
-                            {{form.password1.errors}}
-                        </p>                    
-                    {% endif %}
-                    <input class="full-input" type="password" id="id_password2" value = "{% if form.password.value %}{{form.password.value}}{% endif %}" name="password2" placeholder="Підтвердіть пароль" required>
-                    {% if form.password2.errors %}
-                        <p class="error-message">
-                            {{form.password2.errors}}
-                        </p>                    
-                    {% endif %}
+                    <input class="full-input {% if form.password1.errors %}error{% endif %}" 
+                        type="password" 
+                        id="id_password1" 
+                        value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}" 
+                        name="password1" 
+                        placeholder="Пароль" 
+                        required>
+                     {% if form.password1.errors %}
+                    <p class="error-message">
+                        {{ form.password1.errors }}
+                    </p>
+                     {% endif %}
+
+                     <input class="full-input {% if form.password2.errors %}error{% endif %}" 
+                        type="password" 
+                        id="id_password2" 
+                        value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}" 
+                        name="password2" 
+                        placeholder="Підтвердіть пароль" 
+                        required>
+                     {% if form.password2.errors %}
+                    <p class="error-message">
+                        {{ form.password2.errors }}
+                    </p>
+                     {% endif %}                  
                     <a class="link-btn"><button type="submit" class="form-btn">Зареєструватися</button></a>
                 </form>
             </div>
