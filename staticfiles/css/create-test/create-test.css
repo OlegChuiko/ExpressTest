@@ -209,3 +209,13 @@ margin-left: 21px;
 .link-create-test:hover {
 background-color: #393939;
 }
+
+.file.error {
+  border: 2px solid red;
+  }
+
+.error-message{
+  color:red;
+  text-align: center;
+  margin-top: 5px;
+}

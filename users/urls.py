@@ -8,9 +8,9 @@ from users import views
 app_name = 'user'
 
 urlpatterns = [
-    path('login/',views.login,name='login'),
-    path('registration/',views.registration,name='registration'),
-    path('logout/',views.logout,name='logout'),
+    path('login/',views.Authentication.login,name='login'),
+    path('registration/',views.Authentication.registration,name='registration'),
+    path('logout/',views.Authentication.logout,name='logout'),
 
     path('password-reset/', CustomPasswordReset.as_view(), name='password_reset'),   
 

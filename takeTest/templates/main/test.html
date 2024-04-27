@@ -59,60 +59,69 @@
                 </div>
             {% endfor %} 
             <div class="end-test">
-                <button  class="linl-end-test" type="submit" id="submit-btn" onclick="this.disabled=true; this.innerText='Відправляється...'; this.form.submit();">
+                <button  class="linl-end-test" type="button" id="submit-btn">
                     Завершити тест
-                </button>
+                </button>            
             </div>   
+            <div id="popup" class="popup" style="display: none;">
+                <div class="popup_window">
+                    <div class="popup__yellow_square">
+                         <h2 class="popup__title">
+                            Підтвердження 
+                        </h2>
+                        <p class="popup__text">
+                            Ви впевнені, що хочете завершити тест?
+                            Ви більше не зможете змінювати 
+                            ваші відповіді
+                        </p>
+                        <div class="popup__link">  
+                             <button class="link_delete" type="submit">Завершити тест</button>
+                             <button class="link_cancel link_delete" type="button">Скасувати</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form> 
     </section>
 {% endblock %}
 
 {% block script %}
-            <!-- Якщо тривалість тесту = 0 це означає що тест не обмежений в часі-->
-            {% if test_duration > 0 %}
-                <!-- Скрипт для таймера -->
-                    <script>
-                        function minutesToTime(minutes) {
-                            var hours = Math.floor(minutes / 60);
-                            var remainingMinutes = minutes % 60;
-                            var totalSeconds = minutes * 60;
-                            return { hours: hours, minutes: remainingMinutes, seconds: totalSeconds };
-                        }
-                        
-                        var timerDisplay = document.getElementById('timer');
-                        
-                        function displayTimeLeft(time) {
-                            var display = `${time.hours < 10 ? '0' : ''}${time.hours}:${time.minutes < 10 ? '0' : ''}${time.minutes}:${time.seconds % 60 < 10 ? '0' : ''}${time.seconds % 60}`;
-                            timerDisplay.textContent = display;
-                        }
-                        
-                        function startTimer(totalTimeInMinutes) {
-                            var startTime = Date.now();
-                            var endTime = startTime + totalTimeInMinutes * 60 * 1000;
-                        
-                            var countdown = setInterval(function() {
-                                var secondsLeft = Math.round((endTime - Date.now()) / 1000);
-                                if (secondsLeft < 0) {
-                                    clearInterval(countdown);
-                                    var form = document.getElementById('testForm');
-                                    form.submit();
-                                } else {
-                                    var timeLeft = minutesToTime(Math.floor(secondsLeft / 60));
-                                    timeLeft.seconds = secondsLeft % 60;
-                                    displayTimeLeft(timeLeft);
-                                }
-                            }, 1000);
-                        }
-                        
-                        startTimer({{ test_duration }}); 
-                    </script>
-            {%endif%}
+    {% if test_duration > 0 %}
             <script>
-                window.onload = function() {
-                    window.history.pushState(null, null, window.location.href);
-                    window.onpopstate = function() {
-                        window.history.pushState(null, null, window.location.href);
-                    };
-                };
+                function minutesToTime(minutes) {
+                    var hours = Math.floor(minutes / 60);
+                    var remainingMinutes = minutes % 60;
+                    var totalSeconds = minutes * 60;
+                    return { hours: hours, minutes: remainingMinutes, seconds: totalSeconds };
+                }
+                
+                var timerDisplay = document.getElementById('timer');
+                
+                function displayTimeLeft(time) {
+                    var display = `${time.hours < 10 ? '0' : ''}${time.hours}:${time.minutes < 10 ? '0' : ''}${time.minutes}:${time.seconds % 60 < 10 ? '0' : ''}${time.seconds % 60}`;
+                    timerDisplay.textContent = display;
+                }
+                
+                function startTimer(totalTimeInMinutes) {
+                    var startTime = Date.now();
+                    var endTime = startTime + totalTimeInMinutes * 60 * 1000;
+                
+                    var countdown = setInterval(function() {
+                        var secondsLeft = Math.round((endTime - Date.now()) / 1000);
+                        if (secondsLeft < 0) {
+                            clearInterval(countdown);
+                            var form = document.getElementById('testForm');
+                            form.submit();
+                        } else {
+                            var timeLeft = minutesToTime(Math.floor(secondsLeft / 60));
+                            timeLeft.seconds = secondsLeft % 60;
+                            displayTimeLeft(timeLeft);
+                        }
+                    }, 1000);
+                }
+                
+                startTimer({{ test_duration }}); 
             </script>
+    {%endif%}
+    <script src="{% static "js/test/test.js" %}"></script>
 {% endblock script %}

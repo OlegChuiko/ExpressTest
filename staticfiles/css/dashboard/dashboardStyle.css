@@ -5,6 +5,7 @@ body {
   background-color: #FFF555;
   background-image: url(/static/img/section.png);
   background-repeat: repeat;
+  background-size: cover;
 }
 
 div,
@@ -99,6 +100,7 @@ h6 {
   transition: right 0.3s ease;
   z-index: 1000;
 }
+
 .menu-button {
   cursor: pointer;
   position: relative;
@@ -108,6 +110,7 @@ h6 {
   left: 0;
   top: 23%;
   max-height: 880px;
+  height: 673px;
 }
 .menu-btn__icon {
   position: absolute;
@@ -140,6 +143,11 @@ h6 {
   transform: translateY(-50%);
   border-radius: 50%;
   overflow: hidden;
+  transition: all 0.5s ease;
+}
+
+.circle:hover {
+  background-color: #393939;
 }
 
 .menu-link {
@@ -159,7 +167,13 @@ h6 {
   border-radius: 5px;
   text-align: center;
   text-decoration: none;
+  transition: all 0.5s ease;
 }
+
+.menu-creat-test:hover {
+  background-color: #393939;
+ 
+} 
 
 .menu-title {
   margin-top: 25px;
@@ -194,9 +208,10 @@ h6 {
 }
 .menu-test-view {
   cursor: pointer;
-  border: none; /* Видалити бордер */
+  border: none; 
   background-color: transparent; 
 }
+
 .button-container {
   display: flex;
   gap: 2px;
@@ -207,6 +222,7 @@ h6 {
 }
 
 .menu-list {
+  width: 97%;
   margin-bottom: 109px;
 }
 
@@ -229,16 +245,19 @@ text-align: center;
 text-decoration: none;
 transition: all 0.5s ease;
 max-width: 280px;
-display: flex;
 justify-content: center;
 margin-left: auto;
 align-items: center;
 margin-right: auto;
+margin-top: 10px;
+transition: all 0.5s ease;
+/* transition: all 5s cubic-bezier(0, 0, 1, 1); */
 }
 
 .exit:hover {
-background-color: #393939;
+  background-color: #393939;
 }
+
 
 .box {
 background-color: #FFF;
@@ -321,13 +340,13 @@ padding-left: 190px;
 height: 52px;
 }
 
-.pen1 {
-margin-left: 164px;
-cursor: pointer;
-}
 
-.pen2 {
-margin-left: 82px;
+.pen-svg2{
+  position: absolute;
+  top: -12px;
+  left: -18px;
+  height: 25px;
+  width: 24px;
 }
 
 .pblock2 {
@@ -363,14 +382,17 @@ padding: 0;
 font-family: "Roboto Slab", serif;
 font-weight: 600;
 margin-left: 15px;
+
 }
 
 
 .new-table1 {
 border: 1px solid #000;
 font-size: 20px;
-padding: 11px 0px 13px 0;
+text-align: center;
 background-color: #FCC827;
+width: 235px;
+height: 50px;
 }
 
 
@@ -399,12 +421,6 @@ text-align: center;
   visibility: visible;
   opacity: 1;
 }
-/* .popup:target {
-  opacity: 1;
-  visibility: visible;
-  color: #000;
-  text-decoration: none;
-} */
 
 .popup_window {
   height: 406px;
@@ -484,7 +500,6 @@ text-align: center;
   transition: all 0.5s ease;
   cursor: pointer;
   border: none;
-
 }
 
 .link_delete:hover {
@@ -512,4 +527,82 @@ text-align: center;
 
 .link_cancel:hover {
   background-color: #393939;
+}
+
+.input-container {
+  position: relative;
+    display: inline-block;
+}
+
+.myInput {
+  height: 52px;
+  width: 470px;
+  background-color: #FFF;
+  padding: 12px;
+  text-align: center;
+  border: none;
+  border: 1.5px solid #000;
+  font-family: "Roboto Slab", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: black;
+  margin-top: 5px;
+  margin-left: -16px;
+  margin-right: 2px;
+}
+
+.fix-input {
+  margin-left: -25px;
+}
+
+.myInput::placeholder {
+  color: #000;
+}
+
+.pen {
+  position: absolute;
+  top: 50%;
+  right: 20px; 
+  transform: translateY(-50%);
+  background-color: inherit;
+  border: none;
+  cursor: pointer;
+}
+.pen-svg {
+  position: absolute;
+  top: 50%;
+  right: 20px; 
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+input[type="file"]::-webkit-file-upload-button {
+  opacity: 0;
+  pointer-events: none; 
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.test-list {
+  max-height: 312px;
+  width: 100%;
+  overflow-y: auto;
+  white-space: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 2, 5, 0.7) transparent;
+}
+
+
+.basket {
+  transition: all 0.5s ease;
+  border-radius: 10px;
+}
+
+.basket:hover {
+  background-color: #9E9E9E;
+  font-size: 15px;
+  padding: 5px 5px;
 }

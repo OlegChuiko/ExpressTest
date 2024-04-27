@@ -128,7 +128,7 @@ background-color: #FFF;
 padding: 12px;
 border-radius: 5px;
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-z-index: 9999;
+z-index: 10;
 }
 
 
@@ -180,9 +180,10 @@ justify-content: center;
  border: 1px solid #000;
  margin-top: 17px;
  margin-bottom: 35px;
-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-text-decoration: none;
-transition: all 0.5s ease;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+  transition: all 0.5s ease;
+  cursor: pointer;
 }
 
 .linl-end-test:hover {
@@ -190,3 +191,100 @@ background-color: #393939;
 }
 
 
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.5s ease 0s;
+}
+.popup.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup_window {
+  height: 406px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 10px;
+  transition: all 0.5s ease 0s;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 48%;
+}
+
+.popup:target .popup_window {
+  transform: translate(0px, 0px);
+  opacity: 1;
+}
+
+
+.popup__yellow_square {
+   width: 500px;
+   border-radius: 15px;
+   border: 2px solid #000;
+   background: #FCC827;
+   margin-left: 40px;
+   padding-top: 29px;
+   padding-bottom: 53px;
+}
+
+.popup__title {
+  color: #000;
+  text-align: center;
+  font-family: "Roboto Slab";
+  font-size: 32px;
+  font-weight: 600;
+  max-width: 500px;
+  margin-left: 6px;
+}
+
+.popup__text {
+  text-align: center;
+  font-family: "Roboto Slab";
+  font-size: 20px;
+  margin-top: 45px;
+  margin-left: 45px;
+  max-width: 417px;
+}
+
+.popup__link {
+  display: flex;
+  margin-left: 53px;
+  margin-top: 43px;
+}
+
+.link_delete {
+  color: #FFF;
+  background-color: #000;
+  font-family: "Rufina";
+  font-size: 14px;
+  font-weight: 700;
+  width: 170px;
+  display: block;
+  padding: 12px 0px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.link_delete:hover {
+  background-color: #393939;
+}
+
+.link_cancel {
+  margin-left: 50px;
+}

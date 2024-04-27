@@ -17,7 +17,6 @@ Including another URLconf
 from django.conf.urls import include
 from django.contrib import admin
 from django.urls import path
-from main import views
 
 from expresstest.settings import DEBUG
 

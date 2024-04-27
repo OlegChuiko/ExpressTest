@@ -27,11 +27,16 @@
                 <p class="unique-cod">
                     Ваш унікальний код:
                 </p>
-                <p class="number">
+                <p class="number" onclick="copyNumber()">
                     {{ unique_code }}
                 </p>
                 <a href="{% url 'dashboard:dashBoard' %}" class="passtest">На головну</a>
             </div>
         </div>
     </section>   
+    <div id="copyAlert" class="copy-alert">Код скопійований!</div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static "js/uniqueCodeForTest/CopyCode.js" %}"></script>
 {% endblock %}

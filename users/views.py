@@ -11,49 +11,60 @@ from django.http import HttpResponseRedirect
 from django.views.generic import FormView
 from django.core.mail import EmailMessage
 from django.urls import reverse_lazy
+from dashboard.models import Test
 from django.conf import settings
 from django.contrib import auth
 from django.urls import reverse
 from .models import User
 
-def login(request):
-    if request.user.is_authenticated:
-        return redirect('dashboard:dashBoard')
+class Authentication:
+    def login(request):
+        if request.user.is_authenticated:
+            user_id = request.user.id
+            if Test.objects.filter(user_id=user_id).exists():
+                        latest_test_id = Test.objects.filter(user_id=user_id).latest('test_date').id
+                        return HttpResponseRedirect(reverse('dashboard:test_parameters', kwargs={'test_id': latest_test_id}))
+            else:
+                return redirect('dashboard:dashBoard')
 
-    if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(request,username=username,password=password)
-            if user:
-                auth.login(request,user)
+        if request.method == 'POST':
+            form = UserLoginForm(data=request.POST)
+            if form.is_valid():
+                username = request.POST['username']
+                password = request.POST['password']
+                user = auth.authenticate(request,username=username,password=password)
+                if user:
+                    auth.login(request,user)
 
-                if request.POST.get('next',None):
-                    return HttpResponseRedirect(request.POST.get('next'))
+                    if Test.objects.filter(user_id=user.id).exists():
+                        latest_test_id = Test.objects.filter(user_id=user.id).latest('test_date').id
+                        return HttpResponseRedirect(reverse('dashboard:test_parameters', kwargs={'test_id': latest_test_id}))
 
-                return HttpResponseRedirect(reverse('dashboard:dashBoard'))
-    else:
-        form = UserLoginForm()
-    return render(request,'main/login.html',{'form': form})
+                    if request.POST.get('next',None):
+                        return HttpResponseRedirect(request.POST.get('next'))
 
-@login_required()
-def logout(request):
-    user_logout(request)
-    return redirect('main:index')
+                    return HttpResponseRedirect(reverse('dashboard:dashBoard'))
+        else:
+            form = UserLoginForm()
+        return render(request,'main/login.html',{'form': form})
+
+    @login_required()
+    def logout(request):
+        user_logout(request)
+        return redirect('main:index')
 
 
-def registration(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(data=request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.email  # Присвоюємо значення email полю username
-            user.save()
-            return HttpResponseRedirect(reverse('user:login'))
-    else:
-        form = UserRegistrationForm()
-    return render(request,'main/registration.html',{'form':form})
+    def registration(request):
+        if request.method == 'POST':
+            form = UserRegistrationForm(data=request.POST)
+            if form.is_valid():
+                user = form.save(commit=False)
+                user.username = user.email  # Присвоюємо значення email полю username
+                user.save()
+                return HttpResponseRedirect(reverse('user:login'))
+        else:
+            form = UserRegistrationForm()
+        return render(request,'main/registration.html',{'form':form})
 
 class CustomPasswordReset(FormView):
     template_name = 'main/password_reset_form.html'

@@ -120,6 +120,7 @@ body {
     font-family: "Roboto Slab";
     font-size: 35px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .passtest {
@@ -143,3 +144,17 @@ body {
 .passtest:hover {
     background-color: #393939;
 }
+
+.copy-alert {
+    display: none;
+    background-color: #fcc827;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+

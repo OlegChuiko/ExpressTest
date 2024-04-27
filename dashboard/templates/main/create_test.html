@@ -26,11 +26,16 @@
                     <h2 class="title-create-test">
                         Створіть свій тест
                     </h2>
-                    <input class="name-test" type="text" name="test_name" placeholder="Назва тесту:" required>
+                    <input class="name-test" type="text" value = "{% if test_name %}{{test_name}}{% endif %}" name="test_name" placeholder="Назва тесту:" required>
 
                     <div class="drop_zone">
                         
-                        <input class="file" type="file" name="myfile" id="fileToUpload" accept=".txt">
+                        <input class="file {% if errorFile %}error{% endif %}" type="file" name="myfile" id="fileToUpload" accept=".txt" required>
+                        {% if errorFile %}
+                        <p class="error-message">
+                            {{errorFile}}
+                        </p>
+                    {% endif %}
                       
                     </div>
                     <p class="p-txt">
@@ -42,7 +47,7 @@
                             тесту (в хвилинах)
                         </p>
                         <div class="time-input">
-                            <input class="input-txt" type="number" name="duration_test" min="0" required>
+                            <input class="input-txt" type="number" name="duration_test" min="0" value='0' required>
                         </div>
                     </div>
                     <button type="submit" class="link-create-test">Завантажити тест</button>

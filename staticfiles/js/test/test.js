@@ -1,35 +1,21 @@
-// Функція для збереження вибраних відповідей у локальному сховищі
-function saveSelectedAnswer(questionId, selectedAnswerId) {
-    localStorage.setItem(questionId, selectedAnswerId);
-}
+window.onload = function() {
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = function() {
+        window.history.pushState(null, null, window.location.href);
+    };
+};
 
-// Функція для отримання збережених відповідей з локального сховища
-function loadSelectedAnswer(questionId) {
-    return localStorage.getItem(questionId);
-}
+document.addEventListener("DOMContentLoaded", function() {
+    var submitBtn = document.getElementById("submit-btn");
+    var popup = document.getElementById("popup");
+    var cancelBtn = document.querySelector(".link_cancel");
+    
 
-// Підключення до всіх радіо кнопок та прапорців
-const inputs = document.querySelectorAll('input[type="radio"]');
+    submitBtn.addEventListener("click", function() {
+        popup.style.display = "block";
+    });
 
-// Додавання обробника подій для кожного варіанту відповіді
-inputs.forEach(input => {
-    input.addEventListener('change', function() {
-        const questionId = this.closest('.test-content, .test-content2').getAttribute('id');
-        const selectedAnswerId = this.getAttribute('id');
-        saveSelectedAnswer(questionId, selectedAnswerId);
+    cancelBtn.addEventListener("click", function() {
+        popup.style.display = "none";
     });
 });
-
-// Відновлення збережених відповідей при завантаженні сторінки
-window.addEventListener('load', function() {
-    inputs.forEach(input => {
-        const questionId = input.closest('.test-content, .test-content2').getAttribute('id');
-        const savedAnswerId = loadSelectedAnswer(questionId);
-        if (savedAnswerId === input.getAttribute('id')) {
-            input.checked = true;
-        }
-    });
-});
-
-
-

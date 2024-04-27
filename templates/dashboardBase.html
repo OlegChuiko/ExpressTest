@@ -32,76 +32,84 @@
         </div>
         <h3 class="menu-title">Готові тести</h3>
             <nav class="menu-list">
-                <ul>
+                <ul class="test-list">
                     {% for test in user_tests %}
-                        <li class="list">
-                            <a href="{% url 'dashboard:test_parameters' test_id=test.id %}" class="link">{{ test.test_name }}</a>
-                            <div class="button-container">   
-                                <button id="openBtn{{ test.id }}" class="menu-test-view" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M8.99988 11C8.99988 10.4477 9.44759 10 9.99988 10C10.5522 10 10.9999 10.4477 10.9999 11V17C10.9999 17.5523 10.5522 18 9.99988 18C9.44759 18 8.99988 17.5523 8.99988 17V11Z" fill="black"/>
-                                    <path d="M13.9999 10C13.4476 10 12.9999 10.4477 12.9999 11V17C12.9999 17.5523 13.4476 18 13.9999 18C14.5522 18 14.9999 17.5523 14.9999 17V11C14.9999 10.4477 14.5522 10 13.9999 10Z" fill="black"/>
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.53101 1C5.52352 1 3.19659 3.63591 3.56962 6.62017L5.28861 20.3721C5.47627 21.8734 6.75248 23 8.26545 23H15.7343C17.2473 23 18.5235 21.8734 18.7112 20.3721L20.4301 6.62017C20.8032 3.63591 18.4762 1 15.4688 1H8.53101ZM5.70136 5C6.11054 3.8455 7.21163 3 8.53101 3H15.4688C16.7881 3 17.8892 3.8455 18.2984 5H5.70136ZM5.63266 7L7.27317 20.124C7.33572 20.6245 7.76112 21 8.26545 21H15.7343C16.2386 21 16.664 20.6245 16.7266 20.124L18.3671 7H5.63266Z" fill="black"/>
-                                </svg></button>
+                        <div class="scrollbar" id="style-default">
+                            <div class="force-overflow">
+                                <div class="popupout__list"> 
+                                    <li class="list"> 
+                                        <a href="{% url 'dashboard:test_parameters' test_id=test.id %}" class="link">{{ test.test_name }}</a> 
+                                        <div class="button-container">    
+                                            <button id="openBtn{{ test.id }}" class="menu-test-view" type="button"><svg class="basket" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"> 
+                                                <path d="M8.99988 11C8.99988 10.4477 9.44759 10 9.99988 10C10.5522 10 10.9999 10.4477 10.9999 11V17C10.9999 17.5523 10.5522 18 9.99988 18C9.44759 18 8.99988 17.5523 8.99988 17V11Z" fill="black"/> 
+                                                <path d="M13.9999 10C13.4476 10 12.9999 10.4477 12.9999 11V17C12.9999 17.5523 13.4476 18 13.9999 18C14.5522 18 14.9999 17.5523 14.9999 17V11C14.9999 10.4477 14.5522 10 13.9999 10Z" fill="black"/> 
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8.53101 1C5.52352 1 3.19659 3.63591 3.56962 6.62017L5.28861 20.3721C5.47627 21.8734 6.75248 23 8.26545 23H15.7343C17.2473 23 18.5235 21.8734 18.7112 20.3721L20.4301 6.62017C20.8032 3.63591 18.4762 1 15.4688 1H8.53101ZM5.70136 5C6.11054 3.8455 7.21163 3 8.53101 3H15.4688C16.7881 3 17.8892 3.8455 18.2984 5H5.70136ZM5.63266 7L7.27317 20.124C7.33572 20.6245 7.76112 21 8.26545 21H15.7343C16.2386 21 16.664 20.6245 16.7266 20.124L18.3671 7H5.63266Z" fill="black"/> 
+                                            </svg></button> 
+                                        </div> 
+                                    </li> 
+                                </div>
                             </div>
-                        </li>
-                        <div id="popup{{ test.id }}" class="popup">
-                            <div class="popup_window">
-                                <div class="popup__square">
-                                    <div class="popup__yellow_square">
-                                        <h2 class="popup__title">
-                                            Ви дійсно хочете видалити "{{ test.test_name }}"?
-                                        </h2>
-                                        <p class="popup__text">
-                                            Ви більше не зможете його відновити!
-                                        </p>
-                                        <div class="popup__link">
-                                            <form action="{% url 'dashboard:delete_test' %}" method="post">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="test_id" value="{{ test.id }}">
-                                                <button class="link_delete" type="submit">Видалити тест</button>
-                                            </form>
-                                            <button class="link_cancel" type="button" onclick="hidePopup('popup{{ test.id }}')">Скасувати</button>
+                            </div>
+                            <div id="popup{{ test.id }}" class="popup">
+                                <div class="popup_window">
+                                    <div class="popup__square">
+                                        <div class="popup__yellow_square">
+                                            <h2 class="popup__title">
+                                                Ви дійсно хочете видалити<br>"{{ test.test_name }}"?
+                                            </h2>
+                                            <p class="popup__text">
+                                                Ви більше не зможете його відновити!
+                                            </p>
+                                            <div class="popup__link">
+                                                <form action="{% url 'dashboard:delete_test' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="test_id" value="{{ test.id }}">
+                                                    <button class="link_delete" type="submit">Видалити тест</button>
+                                                </form>
+                                                <button class="link_cancel" type="button" onclick="hidePopup('popup{{ test.id }}')">Скасувати</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                    <div class="link-exit">
-                        <a href="{% url 'user:logout' %}" class="exit">Вийти</a>
-                    </div>
+                    {% endfor %} 
+                </ul>
+                <div class="link-exit">
                     <div class="box">
                         <p class="last-firstname">
                             {{ form.first_name.value }} {{ form.last_name.value }}
                         </p>
-                        <svg class="dots" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <svg class="dots" onclick="toggleExit()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M7 12C7 13.6569 5.65685 15 4 15C2.34315 15 1 13.6569 1 12C1 10.3431 2.34315 9 4 9C5.65685 9 7 10.3431 7 12ZM2.97192 12C2.97192 12.5678 3.43221 13.0281 4 13.0281C4.56779 13.0281 5.02808 12.5678 5.02808 12C5.02808 11.4322 4.56779 10.9719 4 10.9719C3.43221 10.9719 2.97192 11.4322 2.97192 12Z" fill="#0F0F0F"/>
                             <path d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12ZM10.9719 12C10.9719 12.5678 11.4322 13.0281 12 13.0281C12.5678 13.0281 13.0281 12.5678 13.0281 12C13.0281 11.4322 12.5678 10.9719 12 10.9719C11.4322 10.9719 10.9719 11.4322 10.9719 12Z" fill="#0F0F0F"/>
                             <path d="M23 12C23 13.6569 21.6569 15 20 15C18.3431 15 17 13.6569 17 12C17 10.3431 18.3431 9 20 9C21.6569 9 23 10.3431 23 12ZM18.9719 12C18.9719 12.5678 19.4322 13.0281 20 13.0281C20.5678 13.0281 21.0281 12.5678 21.0281 12C21.0281 11.4322 20.5678 10.9719 20 10.9719C19.4322 10.9719 18.9719 11.4322 18.9719 12Z" fill="#0F0F0F"/>
                         </svg>
                     </div>
-                </ul>
+                    <a href="{% url 'user:logout' %}" class="exit" style="display: none;">Вийти</a>
+                </div>
             </nav>
+
         </div>  
     </section>
     {% block testParametrs %}
     
     {% endblock testParametrs %}
-    <script src="{% static "js/dashboard/sidebar.js" %}"></script>
-    <script>
-        {% for test in user_tests %}
-        document.getElementById("openBtn{{ test.id }}").addEventListener("click", function() {
-        document.getElementById("popup{{ test.id }}").classList.add("active");
-    });
-        {% endfor %}
-
-    function hidePopup(popupId) {
-        document.getElementById(popupId).classList.remove("active");
-    }   
-
-    </script>
-    {% endblock %}
+     
+{% endblock %}
 
 {% block script %}
+    <script src="{% static "js/dashboard/sidebar.js" %}"></script>
+    <script src="{% static "js/dashboard/exitButton.js" %}"></script>
+    <script src="{% static "js/dashboard/changeParameters.js" %}"></script>
+    <script src="{% static "js/dashboard/changeFile.js" %}"></script>
+    <script>
+        {% for test in user_tests %}
+            document.getElementById("openBtn{{ test.id }}").addEventListener("click", function() {
+            document.getElementById("popup{{ test.id }}").classList.add("active"); });
+        {% endfor %}
 
+        function hidePopup(popupId) {
+            document.getElementById(popupId).classList.remove("active");
+        }    
+    </script>
 {% endblock %}
