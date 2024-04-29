@@ -17,6 +17,7 @@ class Testing:
             unique_code = request.POST.get('accessCode',None)
             first_name = request.POST.get('first_name',None)
             last_name = request.POST.get('last_name',None)
+            error = None
 
             if unique_code:
                 try:
@@ -25,7 +26,8 @@ class Testing:
                     if not os.path.exists(TestFile.file.path):
                         return HttpResponse('Файл не знайдено')
                 except Test.DoesNotExist:
-                    return HttpResponse('Файл не знайдено')
+                     error = "Тестування не знайдено"
+                     return render(request,'main/take_test.html',{'first_name' : first_name,'last_name' : last_name,'errorCode' : error,'unique_code' : unique_code})
                 
                 questions = []
                 answers = []

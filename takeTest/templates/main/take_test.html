@@ -24,14 +24,19 @@
                 </h2>
                 <form class="form1" action="{% url 'takeTest:test' %}" method="POST">
                     {% csrf_token %}
-                    <input class="lastsurname" type="text" id="first_name" name="first_name" placeholder="Ім'я" required>
-                    <input class="lastsurname" type="text" id="last_name" name="last_name" placeholder="Прізвище" required>
+                    <input class="lastsurname" type="text" id="first_name" name="first_name" value="{% if first_name %}{{first_name}}{% endif %}" placeholder="Ім'я" required>
+                    <input class="lastsurname" type="text" id="last_name" name="last_name" value="{% if last_name %}{{last_name}}{% endif %}" placeholder="Прізвище" required>
                 
                     <h2 class="title-name cod">
                         Введіть код доступу
                         до тесту
                     </h2>
-                    <input class="access-code" type="text" id="accessCode" name="accessCode" placeholder="Код доступу" required maxlength="6" >
+                    <input class="access-code {% if errorCode %}error{% endif %}" type="text" id="accessCode" name="accessCode" value="{% if unique_code %}{{unique_code}}{% endif %}" placeholder="Код доступу" required maxlength="6" >
+                    {% if errorCode %}
+                        <p class="error-message">
+                            {{errorCode}}
+                        </p>
+                    {% endif %}
                     <button class="link-test" type="submit">Пройти тест</button>
                 </form>
             </div>
