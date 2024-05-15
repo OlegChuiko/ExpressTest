@@ -27,16 +27,75 @@
                         </svg>
                     </h1>
                 </div>
-                <a href="" class="header-link">?</a>
+                <a href="" class="header-link" id="popup-link2">?</a>
             </div>
         </div>
     </header>
     {% block content %}
     
     {% endblock %}
+     <div id="popupTwo" class="popup2" style="display: none;">
+        <div class="popup_window2">
+                <div class="popup__yellow_square2">
+                    <a class="popup__certificate2">Довідка</a>
+                    <a class="popup__create__text2">Створити тест</a>
+                    <p class="popup__txt1">
+                        Після натискання кнопки <spanё>"Створити тест"</span> ви потрапляєте на сторінку, де вам потрібно 
+                        ввести назву тесту, вибрати необхідний час для його проходження та завантажити файл у 
+                        форматі .txt. Для завантаження файлу ви можете натиснути на  поле і вибрати файл із свого 
+                        комп'ютера або просто перетягнути його у відповідне поле.
+                    </p>
+                    <div class="popup__container__text">
+                        <p class="popup__txt2">
+                            Для створення текстового файлу для тесту, що містить запитання та варіанти відповідей, 
+                            слід дотримуватися наступних кроків:
+                        </p>
+                        <div class="number__lists">
+                            <ol class="number__list">
+                                <li class="list1">
+                                    Відкривши текстовий редактор, додайте запитання для тесту, розмістивши його на 
+                                    початку рядка;
+                                </li>
+                                <li class="list2">
+                                    Після запитання пропустіть один рядок та додайте список варіантів відповідей. 
+                                     Кожну відповідь записуйте з нового рядка;
+                                </li>
+                                <li>
+                                    Позначте правильну відповідь символом “+” та пропустіть рядок перед наступним питанням.
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <p class="txt__result">
+                        У результаті має виглядати так:
+                    </p>
+                    <div class="popup__text_answer">
+                        <p>
+                            1.Питання?
+                        </p>
+                       <div class="container__answer">
+                        <p class="more__answer">
+                            Відповідь 1
+                        </p>
+                        <p class="more__answer2">
+                            Відповідь 2+                              
+                        </p>
+                        <p class="more__answer3">
+                            Відповідь 3
+                        </p>
+                        <p class="more__answer4">
+                            Відповідь 4
+                        </p>
+                       </div>
 
+                        <p>
+                            2.Питання?
+                        </p>
+                    </div>
+            </div>
+        </div> 
     {% block script %}
-    
+        <script src="{% static "js/doc/documentationApear.js" %}"></script>
     {% endblock %}
 </body>
 </html>

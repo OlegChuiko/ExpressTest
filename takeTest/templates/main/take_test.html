@@ -22,8 +22,7 @@
                     Введіть прізвище та 
                     ім’я
                 </h2>
-                <form class="form1" action="{% url 'takeTest:test' %}" method="POST">
-                    {% csrf_token %}
+                <form class="form1" action="{% url 'takeTest:test' %}" method="GET">
                     <input class="lastsurname" type="text" id="first_name" name="first_name" value="{% if first_name %}{{first_name}}{% endif %}" placeholder="Ім'я" required>
                     <input class="lastsurname" type="text" id="last_name" name="last_name" value="{% if last_name %}{{last_name}}{% endif %}" placeholder="Прізвище" required>
                 
@@ -43,3 +42,9 @@
         </div>
     </section>
 {%endblock %}
+
+{% block script %}
+    <script>
+        localStorage.clear();
+    </script>
+{% endblock %}

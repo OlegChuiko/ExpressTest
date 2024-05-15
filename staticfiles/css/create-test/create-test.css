@@ -219,3 +219,131 @@ background-color: #393939;
   text-align: center;
   margin-top: 5px;
 }
+
+.popup2 {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(2px);
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: all 0.5s ease 0s;
+}
+
+
+.popup_window2 {
+  height: 406px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 10px;
+  transition: all 0.5s ease 0s;
+  opacity: 1;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.popup__yellow_square2 {
+  width: 1100px;
+  border-radius: 15px;
+  border: 2px solid #000;
+  background: #FCC827;
+  margin-left: 40px;
+  padding-top: 37px;
+  padding-bottom: 35px;
+}
+
+.popup__certificate2 {
+  color: #FFF;
+  background-color: #000;
+  font-weight: 600;
+  font-family: "Roboto Slab";
+  font-size: 35px;
+  width: 218px;
+  display: block;
+  padding: 5px 0px 11px 0px;
+  border-radius: 10px;
+  text-align: center;
+  text-decoration: none;
+   margin-left: 444px;
+}
+
+.popup__create__text2 {
+  color: #FFF;
+  font-family: "Roboto Slab";
+  font-weight: 800;
+  font-size: 35px;
+  padding-left: 36px;
+  text-decoration: underline;
+}
+
+.popup__txt1 {
+  font-family: "Roboto Slab";
+  font-size: 20px;
+  padding-left: 36px;
+  text-indent: 25px;
+  padding-top: 15px;
+}
+
+.popup__txt1 span {
+  font-weight: 800;
+}
+
+.popup__container__text {
+  font-size: 20px;
+  font-family: "Roboto Slab", serif;
+  padding-top: 11px;
+}
+
+.popup__txt2 {
+  padding-left: 36px;
+  text-indent: 25px;
+}
+
+.number__list {
+  margin: 0;
+  padding-left: 53px;
+}
+
+.list1 {
+  max-width: 940px;
+}
+
+.list2 {
+  max-width: 890px;
+}
+
+.txt__result {
+  text-align: center;
+  padding-top: 10px;
+  font-family: "Roboto Slab", serif;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.popup__text_answer {
+  flex-direction: column;
+  font-family: "Roboto Slab", serif;
+  font-size: 20px;
+  text-align: center;
+  background-color: #FFF;
+  border: 1px solid #000;
+  width: 371px;
+  margin-left: 371px;
+  border-radius: 15px;
+  padding: 6px 0px 6px 0px;
+}
+
+.container__answer {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.more__answer2 {
+  padding-left: 11px;
+}

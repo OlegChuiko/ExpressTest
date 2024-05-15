@@ -23,36 +23,21 @@
         <form id="testForm" action="{% url 'takeTest:testResult' %}" method="post">
             {% csrf_token %}
             {% for question, answers in qas %}
-                <div class="test-box">
+                <div class="test-box noselect nodrag">
                     <div class="test-content">
                             <p class="correct-answer">
                                 Виберіть одну правильну відповідь.<br>{{question}}
                             </p>
                             <ul class="content-list">
                                 {% for answer in answers %}
-                                    {% if answer|last == '+' %}
-                                        {% with temporary_answer=answer|slice:'0:-1' %}
-                                            <li class="list-answer"> 
-                                                <input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">
-                                                <label for="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="label-answer">{{ temporary_answer }}</label>
-                                            </li> 
-    
-                                            <!-- На випадок якщо користувач не вибрав жоден з варіантів -->
-                                            <li style="display: none;">
-                                                <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" value="default" checked>
-                                            </li>
-                                        {% endwith %}
-                                    {% else %}
-                                        <li class="list-answer">
-                                            <input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">
-                                            <label for="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="label-answer">{{ answer }}</label>
-                                        </li>
-                                        
-                                        <!-- На випадок якщо користувач не вибрав жоден з варіантів -->           
-                                        <li style="display: none;">
-                                            <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" value="default" checked>
-                                        </li>
-                                    {% endif %}                  
+                                    <li class="list-answer"> 
+                                        <input type="radio" id="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" name="UserAnswer{{ forloop.parentloop.counter }}" value="{{ answer }}">
+                                        <label for="option{{ forloop.parentloop.counter }}_{{ forloop.counter }}" class="label-answer">{{ answer }}</label>
+                                    </li> 
+
+                                    <li style="display: none;">
+                                        <input type="radio" name="UserAnswer{{ forloop.parentloop.counter }}" value="INCORRECTTTTTT#@!" checked>
+                                    </li>                
                                 {% endfor %}      
                             </ul>
                     </div>
@@ -87,7 +72,48 @@
 
 {% block script %}
     {% if test_duration > 0 %}
-            <script>
+        <script>
+            function minutesToTime(minutes) {
+                var hours = Math.floor(minutes / 60);
+                var remainingMinutes = minutes % 60;
+                var totalSeconds = minutes * 60;
+                return { hours: hours, minutes: remainingMinutes, seconds: totalSeconds };
+            }
+
+            var timerEndTime = localStorage.getItem('timerEndTime');
+            timerEndTime = parseInt(timerEndTime);
+            if (!isNaN(timerEndTime)) 
+            {
+                var timerDisplay = document.getElementById('timer');
+                
+                function displayTimeLeft(time) {
+                    var display = `${time.hours < 10 ? '0' : ''}${time.hours}:${time.minutes < 10 ? '0' : ''}${time.minutes}:${time.seconds % 60 < 10 ? '0' : ''}${time.seconds % 60}`;
+                    timerDisplay.textContent = display;
+                }
+                
+                function startTimer(endTime) {
+                    var startTime = Date.now();
+                
+                    var countdown = setInterval(function() {
+                        var secondsLeft = Math.round((endTime - Date.now()) / 1000);
+                        if (secondsLeft < 0) {
+                            clearInterval(countdown);
+                            localStorage.removeItem('timerEndTime');
+                            var form = document.getElementById('testForm');
+                            form.submit();
+                        } else {
+                            var timeLeft = minutesToTime(Math.floor(secondsLeft / 60));
+                            timeLeft.seconds = secondsLeft % 60;
+                            displayTimeLeft(timeLeft);
+                            localStorage.setItem('timerEndTime', endTime.toString());
+                        }
+                    }, 1000);
+                }
+                
+                startTimer(timerEndTime); 
+            } 
+            else 
+            {
                 function minutesToTime(minutes) {
                     var hours = Math.floor(minutes / 60);
                     var remainingMinutes = minutes % 60;
@@ -110,18 +136,29 @@
                         var secondsLeft = Math.round((endTime - Date.now()) / 1000);
                         if (secondsLeft < 0) {
                             clearInterval(countdown);
+                            localStorage.removeItem('timerEndTime');
                             var form = document.getElementById('testForm');
                             form.submit();
                         } else {
                             var timeLeft = minutesToTime(Math.floor(secondsLeft / 60));
                             timeLeft.seconds = secondsLeft % 60;
                             displayTimeLeft(timeLeft);
+                            localStorage.setItem('timerEndTime', endTime.toString());
                         }
                     }, 1000);
                 }
                 
                 startTimer({{ test_duration }}); 
-            </script>
+            }   
+        </script>
+    {% else %}
+        <style>
+            .fixed-timer {
+                display: none;
+            }
+        </style>
     {%endif%}
+    <script src="{% static "js/test/SaveInLocaleStorage.js" %}"></script>
     <script src="{% static "js/test/test.js" %}"></script>
+    <script src="{% static "js/doc/documentationApear.js" %}"></script>
 {% endblock script %}
