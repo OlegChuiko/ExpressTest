@@ -37,11 +37,18 @@
      <div id="popupTwo" class="popup2" style="display: none;">
         <div class="popup_window2">
                 <div class="popup__yellow_square2">
-                    <a class="popup__certificate2">Довідка</a>
+                    <div class="my__modal">
+                        <a class="popup__certificate2">Довідка</a>
+                        <button class="close__btn" id="close_my_modal_btn">
+                            <svg width="35" height="35" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M4.11 2.697L2.698 4.11 6.586 8l-3.89 3.89 1.415 1.413L8 9.414l3.89 3.89 1.413-1.415L9.414 8l3.89-3.89-1.415-1.413L8 6.586l-3.89-3.89z" fill="#000"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <a class="popup__create__text2">Створити тест</a>
                     <p class="popup__txt1">
-                        Після натискання кнопки <spanё>"Створити тест"</span> ви потрапляєте на сторінку, де вам потрібно 
-                        ввести назву тесту, вибрати необхідний час для його проходження та завантажити файл у 
+                        Після натискання кнопки <span>"Створити тест"</span> ви потрапляєте на сторінку, де вам потрібно 
+                        ввести назву тесту, вибрати необхідний час для його проходження (якщо встановити 0 то час буде не обмежений) та завантажити файл у 
                         форматі .txt. Для завантаження файлу ви можете натиснути на  поле і вибрати файл із свого 
                         комп'ютера або просто перетягнути його у відповідне поле.
                     </p>
@@ -54,7 +61,7 @@
                             <ol class="number__list">
                                 <li class="list1">
                                     Відкривши текстовий редактор, додайте запитання для тесту, розмістивши його на 
-                                    початку рядка;
+                                    початку рядка(нумерувати запитання не потрібно, система зробить це за вас);
                                 </li>
                                 <li class="list2">
                                     Після запитання пропустіть один рядок та додайте список варіантів відповідей. 
@@ -71,7 +78,7 @@
                     </p>
                     <div class="popup__text_answer">
                         <p>
-                            1.Питання?
+                            Питання?
                         </p>
                        <div class="container__answer">
                         <p class="more__answer">
@@ -89,13 +96,15 @@
                        </div>
 
                         <p>
-                            2.Питання?
+                            Питання?
                         </p>
                     </div>
+                </div>
             </div>
         </div> 
     {% block script %}
         <script src="{% static "js/doc/documentationApear.js" %}"></script>
+        <script src="{% static "js/doc/documentatioDisapear.js" %}"></script>
     {% endblock %}
 </body>
 </html>

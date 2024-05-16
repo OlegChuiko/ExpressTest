@@ -1,4 +1,3 @@
-from typing import Any
 from django.views.decorators.cache import never_cache
 from django.shortcuts import redirect, render
 from django.http import HttpResponse

@@ -330,3 +330,33 @@ body {
   -moz-user-drag: none; 
   -ms-user-drag: none; 
 }
+
+.my__modal {
+    
+  position: relative;
+}
+
+.close__btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: none;
+  background-color: transparent;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.close__btn svg path {
+  transition: fill .4s;
+}
+
+.close__btn:hover svg path {
+  fill: #727272;
+}
+
+.popup__cont__txt {
+  overflow-y: auto;
+  max-height: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 2, 5, 0.7) transparent;
+}

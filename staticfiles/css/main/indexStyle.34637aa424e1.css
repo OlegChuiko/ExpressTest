@@ -18,7 +18,7 @@ body {
   ul,
   li {
     box-sizing: border-box;
-    margin: 0;
+    margin: 0px;
   }
   
   h1,
@@ -28,7 +28,6 @@ body {
   h5,
   h6 {
     margin: 0;
-    padding: 0;
   }
 
 .header {
@@ -77,18 +76,19 @@ body {
     text-align: center;
     text-decoration: none;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  } 
+  }  
 
-  .square {
+
+.section-square {
     max-width: 1000px;
     background-color: #fff;
     border-radius: 15px;
     border: 2px solid black;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
     margin: 0 auto;
-    margin-top: 65px;
-    padding-top: 62px;
-    padding-bottom: 71px;
+    padding-top: 66px;
+    padding-bottom: 66px;
+    margin-top: 100px;
 }
 
 .circle {
@@ -97,65 +97,43 @@ body {
     background-color: #FCC827;
     border-radius: 50%;
     margin-left: 226px;
-    padding-top: 179px;
-  }
-
-.title-readytest {
-    text-align: center;
-    font-family: "Roboto Slab";
-    font-size: 35px;
-    font-weight: 600;
 }
 
-.unique-cod {
+.simple-title {
+    padding-top: 131px;
     color: #000;
     text-align: center;
     font-family: "Roboto Slab";
-    font-size: 20px;
-    margin-top: 16px;
-}
-
-.number {
-    text-align: center;
-    font-family: "Roboto Slab";
     font-size: 35px;
-    font-weight: 600;
-    cursor: pointer;
+    font-weight: 500;
 }
 
-.passtest {
+.links {
+    display: flex;
+    margin-left: 76px;
+    margin-top: 31px;
+    gap: 60px;
+}
+
+.link 
+{
     color: #FFF;
-    background-color: #000;
-    font-family: "Rufina", serif;
-    font-size: 15px;
+    font-family: 'Rufina';
     font-weight: 700;
+    background-color: #000;
+    font-size: 13px;
     width: 170px;
     display: block;
-    padding-top: 11px;
-    padding-bottom: 13px;
+    padding: 12px 0px;
     border-radius: 5px;
     text-align: center;
     text-decoration: none;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     transition: all 0.5s ease;
-    margin-left: 189px;
-    margin-top: 12px;
 }
 
-.passtest:hover {
+.link:hover {
     background-color: #393939;
-}
-
-.copy-alert {
-    display: none;
-    background-color: #fcc827;
-    padding: 10px;
-    border: 1px solid #000;
-    border-radius: 5px;
-    position: absolute;
-    top: 200px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .popup2 {
@@ -170,7 +148,7 @@ body {
     overflow-x: hidden;
     transition: all 0.5s ease 0s;
   }
-  
+
   
   .popup_window2 {
     height: 406px;
@@ -185,7 +163,7 @@ body {
     top: 50%;
     left: 50%;
   }
-  
+
   .popup__yellow_square2 {
     width: 1100px;
     border-radius: 15px;
@@ -194,9 +172,9 @@ body {
     margin-left: 40px;
     padding-top: 37px;
     padding-bottom: 35px;
-  }
-  
-  .popup__certificate2 {
+ }
+
+.popup__certificate2 {
     color: #FFF;
     background-color: #000;
     font-weight: 600;
@@ -209,62 +187,64 @@ body {
     text-align: center;
     text-decoration: none;
      margin-left: 444px;
-  }
-  
-  .popup__create__text2 {
+}
+
+.popup__create__text2 {
     color: #FFF;
     font-family: "Roboto Slab";
     font-weight: 800;
     font-size: 35px;
     padding-left: 36px;
     text-decoration: underline;
-  }
-  
-  .popup__txt1 {
+}
+
+.popup__txt1 {
     font-family: "Roboto Slab";
     font-size: 20px;
     padding-left: 36px;
     text-indent: 25px;
     padding-top: 15px;
-  }
-  
-  .popup__txt1 span {
+}
+
+.popup__txt1 span {
     font-weight: 800;
-  }
-  
-  .popup__container__text {
+}
+
+.popup__container__text {
     font-size: 20px;
     font-family: "Roboto Slab", serif;
     padding-top: 11px;
-  }
-  
-  .popup__txt2 {
+}
+
+.popup__txt2 {
     padding-left: 36px;
     text-indent: 25px;
-  }
-  
-  .number__list {
+}
+
+.number__list {
     margin: 0;
     padding-left: 53px;
-  }
-  
-  .list1 {
+}
+
+.list1 {
     max-width: 940px;
-  }
-  
-  .list2 {
+}
+
+.list2 {
     max-width: 890px;
-  }
-  
-  .txt__result {
+}
+
+.txt__result {
     text-align: center;
     padding-top: 10px;
     font-family: "Roboto Slab", serif;
     font-size: 20px;
     font-weight: 900;
-  }
-  
-  .popup__text_answer {
+}
+
+
+
+.popup__text_answer {
     flex-direction: column;
     font-family: "Roboto Slab", serif;
     font-size: 20px;
@@ -275,13 +255,115 @@ body {
     margin-left: 371px;
     border-radius: 15px;
     padding: 6px 0px 6px 0px;
-  }
-  
-  .container__answer {
+}
+
+.container__answer {
     padding-top: 25px;
     padding-bottom: 25px;
-  }
-  
-  .more__answer2 {
+}
+
+.more__answer2 {
     padding-left: 11px;
-  }
+}
+
+@media screen and (max-width: 678px) {
+
+
+    .container {
+        max-width: 90%;
+    }
+
+    .header-logo {
+        width: 20%; 
+        max-width: 200px; 
+        height: auto; 
+        border-radius: 10px;
+        border: 1px solid black;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .header-title {
+        font-size: 19px;
+        text-align: center;
+    }
+
+
+    .header-circle {
+        width: 25px;
+        height: 22px;
+    }
+
+    .header-link {
+        font-size: 25px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .section-square {
+        position: relative;
+        left: 2px;
+        max-width: 400px;
+    }
+
+    .circle {
+        max-width: 270px;
+        height: 270px;
+        margin-left: 15px;
+        position: relative;
+        left: 15px;
+    }
+
+    .simple-title {
+        font-size: 20px;
+        padding-top: 50px;
+    }
+
+    .links {
+        margin-left:  0;
+        margin-top: 15px;
+        gap: 10px;
+        padding-left: 66px;
+        flex-direction: column;
+    }
+
+    .link {
+        max-width: 140px;
+        font-size: 14px;
+        padding: 10px 0px;
+    }
+}
+
+.my__modal {
+    
+    position: relative;
+}
+
+.close__btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    border: none;
+    background-color: transparent;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.close__btn svg path {
+    transition: fill .4s;
+}
+
+.close__btn:hover svg path {
+    fill: #727272;
+}
+
+.popup__cont__txt {
+    overflow-y: auto;
+    max-height: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 2, 5, 0.7) transparent;
+}
